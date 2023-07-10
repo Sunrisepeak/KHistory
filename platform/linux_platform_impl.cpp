@@ -66,6 +66,7 @@ void PAL::platformInit() {
     for (int keycode = 0; keycode < 256; keycode++) {
         char *keyName = XKeysymToString(XKeycodeToKeysym(display, keycode, 0));
         if (keyName) PAL::KeyMapTable[keycode] = keyName;
+        for (char& c : PAL::KeyMapTable[keycode]) c = std::toupper(c);
     }
 }
 
@@ -80,9 +81,9 @@ dstruct::Vector<PAL::WindowInfo> PAL::platformWindowInfos() {
     return wInfos;
 }
 
-PAL::KeyData PAL::platformKeyDetect(unsigned int wID) {
+dstruct::Vector<PAL::KeyData> PAL::platformKeyDetect(unsigned int wID) {
     static Window currentWindowId = DefaultRootWindow(display);
-    int revert;
+    dstruct::Vector<PAL::KeyData> keyEventVec;
     PAL::KeyData kd { 0, false };
     XEvent event;
 
@@ -95,25 +96,26 @@ PAL::KeyData PAL::platformKeyDetect(unsigned int wID) {
         //printf ("platformKeyDetect: window id, from %ld to %ld\n", currentWindowId, wID);
     }
 
-    if (XEventsQueued(display, QueuedAfterFlush) > 0) {
+    while(XEventsQueued(display, QueuedAfterFlush) > 0) {
         XNextEvent(display, &event);
+        kd.key = event.xkey.keycode;
         switch (event.type) {
             case KeyPress:
-                kd.key = event.xkey.keycode;
                 kd.pressed = true;
                 break;
             case KeyRelease:
-                kd.key = event.xkey.keycode;
                 kd.pressed = false;
                 break;
             default: {
-                printf ("Other Event...!\n");
+                //printf ("Other Event...!\n");
+                //DSTRUCT_ASSERT(false);
             }
         }
+        keyEventVec.push(kd);
     }
 
     //printf ("platformKeyDetect end");
-    return kd;
+    return keyEventVec;
 }
 
 void PAL::platformDeinit() {

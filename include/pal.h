@@ -1,5 +1,5 @@
-#ifndef __PLATFOMR_H__
-#define __PLATFOMR_H__
+#ifndef __PAL_H__KHISTORY
+#define __PAL_H__KHISTORY
 
 #include <string>
 #include <dstruct.hpp>
@@ -23,10 +23,11 @@ public: // type
             return title;
         }
     };
+
 public: // interface
     static void platformInit();
     static dstruct::Vector<WindowInfo> platformWindowInfos();
-    static KeyData platformKeyDetect(unsigned int wID);
+    static dstruct::Vector<KeyData> platformKeyDetect(unsigned int wID);
     static void platformDeinit();
 
 public:

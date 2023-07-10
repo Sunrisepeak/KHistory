@@ -1,8 +1,11 @@
-#ifndef __KEY_DETECT_H__
-#define __KEY_DETECT_H__
+#ifndef __KEY_DETECT_H__KHISTORY
+#define __KEY_DETECT_H__KHISTORY
 
+// std
 #include <mutex>
 #include <thread>
+
+// dstruct
 #include <dstruct.hpp>
 
 #include "pal.h"
@@ -19,16 +22,20 @@ private:
     ~TargetWindowKeyDetect();
 public:
     static TargetWindowKeyDetect & getInstance();
+    float getRealDetectFPS() const;
+    void setDetectFPS(int fps);
     dstruct::Vector<PAL::WindowInfo> getWindowInfoList();
     void setTargetWindow(const PAL::WindowInfo &wInfo);
     const PAL::WindowInfo & getTargetWindow() const;
     void setPressedKey(int key, bool pressed = true);
-    dstruct::Vector<int> getPressedKeyList() const;
+    dstruct::Vector<int> getPressedKeyVec() const;
 private:
-    void __detectKeyInfo();
+    void __detectKeyInfoThreadFunc();
 private:
     bool __mExitDetect;
     bool __mKeyPressMapTable[256];
+    int __mDetectFPS;
+    float __mRealDetectFPS;
     PAL::WindowInfo __mTargetWindowInfo;
     dstruct::Vector<PAL::WindowInfo> __mCurrentWindowList;
     mutable std::mutex __mPlatformAccessMutex;

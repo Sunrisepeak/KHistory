@@ -14,7 +14,6 @@ add_includedirs(
 add_packages("imgui")
 
 add_files("third-party/DSVisual/dsv-core/dsvisual-core.cpp")
-add_files("src/*.cpp")
 
 add_links("X11")
 
@@ -28,4 +27,4 @@ target("KeyHistory-test")
 target("KeyHistory")
     set_kind("binary")
     add_cxxflags("-g")
-    add_files("main.cpp")
+    add_files("src/*.cpp")

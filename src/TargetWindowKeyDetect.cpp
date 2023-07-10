@@ -12,10 +12,13 @@ namespace khistory {
 TargetWindowKeyDetect::TargetWindowKeyDetect() :
     __mExitDetect { false },
     __mKeyPressMapTable { false },
+    __mDetectFPS { 60 },
+    __mRealDetectFPS { 0 },
     __mTargetWindowInfo { 0, "" },
     __mCurrentWindowList { },
-    __mPlatformAccessMutex { } {
-    __mDetectThread = std::move(std::thread(&TargetWindowKeyDetect::__detectKeyInfo, this));
+    __mPlatformAccessMutex { }
+{
+    __mDetectThread = std::move(std::thread(&TargetWindowKeyDetect::__detectKeyInfoThreadFunc, this));
 }
 
 TargetWindowKeyDetect::~TargetWindowKeyDetect() {
@@ -27,6 +30,14 @@ TargetWindowKeyDetect::~TargetWindowKeyDetect() {
 TargetWindowKeyDetect & TargetWindowKeyDetect::getInstance() {
     static TargetWindowKeyDetect kd;
     return kd;
+}
+
+float TargetWindowKeyDetect::getRealDetectFPS() const {
+    return __mRealDetectFPS;
+}
+
+void TargetWindowKeyDetect::setDetectFPS(int fps) {
+    __mDetectFPS = fps;
 }
 
 dstruct::Vector<PAL::WindowInfo>
@@ -56,7 +67,7 @@ void TargetWindowKeyDetect::setPressedKey(int index, bool pressed) {
     __mKeyPressMapTable[index] = pressed;
 }
 
-dstruct::Vector<int> TargetWindowKeyDetect::getPressedKeyList() const {
+dstruct::Vector<int> TargetWindowKeyDetect::getPressedKeyVec() const {
     dstruct::Vector<int> ans;
     for (int i = 0; i < 256; i++) {
         if (__mKeyPressMapTable[i])
@@ -65,21 +76,37 @@ dstruct::Vector<int> TargetWindowKeyDetect::getPressedKeyList() const {
     return ans;
 }
 
-void TargetWindowKeyDetect::__detectKeyInfo() {
+void TargetWindowKeyDetect::__detectKeyInfoThreadFunc() {
     PAL::platformInit();
+    // 初始化计时器
+    auto startTime = std::chrono::high_resolution_clock::now();
+    int frameCount = 0;
     while (!__mExitDetect) {
         if (__mTargetWindowInfo.id != 0) {
             // block detect ?
-            PAL::KeyData keyData = PAL::platformKeyDetect(__mTargetWindowInfo.id);
-            if (keyData.key > 0 && keyData.key < 256)
-                __mKeyPressMapTable[keyData.key] = keyData.pressed;
-            else {
-                if (keyData.key == -1) {
-                    __mTargetWindowInfo.id = 0;
+            auto keyEventVec = PAL::platformKeyDetect(__mTargetWindowInfo.id);
+            // handle key event and update __mKeyPressMapTable
+            for (auto &keyEvent : keyEventVec) {
+                if (keyEvent.key > 0 && keyEvent.key < 256) {
+                    //std::cout << keyEvent.key << " " << keyEvent.pressed << std::endl;
+                    __mKeyPressMapTable[keyEvent.key] = keyEvent.pressed;
                 }
             }
         }
-        std::this_thread::sleep_for(std::chrono::milliseconds(1000 / 60));
+        std::this_thread::sleep_for(std::chrono::milliseconds(1000 / __mDetectFPS));
+        { // compute detect fps
+            auto currentTime = std::chrono::high_resolution_clock::now();
+            float frameTime = std::chrono::duration<float, std::chrono::seconds::period>(currentTime - startTime).count();
+
+            frameCount++;
+
+            if (frameTime >= 1.0f) {
+                __mRealDetectFPS = frameCount / frameTime;
+                // reset
+                startTime = currentTime;
+                frameCount = 0;
+            }
+        }
     }
     PAL::platformDeinit();
 }
