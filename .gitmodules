@@ -1,0 +1,6 @@
+[submodule "third-party/DStruct"]
+	path = third-party/DStruct
+	url = https://github.com/Sunrisepeak/DStruct.git
+[submodule "third-party/DSVisual"]
+	path = third-party/DSVisual
+	url = https://github.com/Sunrisepeak/DSVisual.git
