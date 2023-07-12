@@ -46,9 +46,9 @@ void KeyHistory::__gameKeyVisualImpl() {
 
     style.ItemSpacing = ImVec2(spacing, spacing);
 
-    int areaHeight = ImGui::GetWindowHeight() / 3;
-    int areaWidth = ImGui::GetWindowWidth() / 3;
-    int bWidth = areaWidth / 4, bHeight = bWidth;
+    float areaHeight = ImGui::GetWindowHeight() / 3;
+    float areaWidth = ImGui::GetWindowWidth() / 3;
+    float bWidth = areaWidth / 4, bHeight = bWidth;
 
     {
         int firstLineAreaStart = areaWidth / 2 - bWidth / 2;

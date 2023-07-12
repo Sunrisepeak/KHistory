@@ -8,7 +8,7 @@
 // dstruct
 #include <dstruct.hpp>
 
-#include "pal.h"
+#include "PAL.h"
 
 namespace khistory {
 

@@ -31,6 +31,7 @@ public: // interface
     static void platformDeinit();
 
 public:
+    static unsigned long gamepadConnected;
     static dstruct::Vector<std::string> KeyMapTable;
 };
 

@@ -3,12 +3,13 @@
 #include <dstruct.hpp>
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
-#include "pal.h"
+#include "PAL.h"
 
 namespace khistory {
 
 static Display* display = nullptr;
 dstruct::Vector<std::string> PAL::KeyMapTable;
+unsigned long PAL::gamepadConnected = 0;
 
 static void list_windows(Display *display, Window root, int depth, dstruct::Vector<PAL::WindowInfo> &wInfos) {
     Window parent;
