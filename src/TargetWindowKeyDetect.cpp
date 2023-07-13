@@ -77,7 +77,6 @@ dstruct::Vector<int> TargetWindowKeyDetect::getPressedKeyVec() const {
 }
 
 void TargetWindowKeyDetect::__detectKeyInfoThreadFunc() {
-    PAL::platformInit();
     // 初始化计时器
     auto startTime = std::chrono::high_resolution_clock::now();
     int frameCount = 0;
@@ -112,7 +111,6 @@ void TargetWindowKeyDetect::__detectKeyInfoThreadFunc() {
             }
         }
     }
-    PAL::platformDeinit();
 }
 
 }
