@@ -8,7 +8,7 @@
 
 ### Single file, don't need install, run directly
 
-> **get last-version of your platform from release**
+> **get last-version of your platform from [Release](https://github.com/Sunrisepeak/KHistory/releases)**
 
 
 

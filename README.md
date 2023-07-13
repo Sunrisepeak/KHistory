@@ -7,7 +7,7 @@ KHistory 是一个**优雅**的按键 检测/历史记录 工具
 
 ### 无需安装单文件下载即用
 
-> **点击右边release获取对应平台最新版本**
+> **点击[Release](https://github.com/Sunrisepeak/KHistory/releases)获取对应平台最新版本**
 
 
 
