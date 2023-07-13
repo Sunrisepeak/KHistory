@@ -8,8 +8,6 @@
 namespace khistory {
 
 static Display* display = nullptr;
-dstruct::Vector<std::string> PAL::KeyMapTable;
-unsigned long PAL::gamepadConnected = 0;
 
 static void list_windows(Display *display, Window root, int depth, dstruct::Vector<PAL::WindowInfo> &wInfos) {
     Window parent;

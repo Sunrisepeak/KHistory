@@ -107,18 +107,28 @@ void KeyHistory::__updateGameKeyHighlightVec(const __KeyData &kd) {
     _mGameKeyHighlightTable.resize(256, ImVec4(0, 0, 0, 0.25));
     // keyboard
     for (auto key : kd.keyVec) {
-        // keyboard
-        if (PAL::KeyMapTable[key] == "W") _mGameKeyHighlightTable['W'] = _mKeyColorMapTable[key];
-        else if (PAL::KeyMapTable[key] == "A") _mGameKeyHighlightTable['A'] = _mKeyColorMapTable[key];
-        else if (PAL::KeyMapTable[key] == "S") _mGameKeyHighlightTable['S'] = _mKeyColorMapTable[key];
-        else if (PAL::KeyMapTable[key] == "D") _mGameKeyHighlightTable['D'] = _mKeyColorMapTable[key];
-
-        // xbox y, x, a, b
+        if (PAL::gamepadConnected) { // use lowercase for gamepad
+            if (PAL::KeyMapTable[key] == "<") _mGameKeyHighlightTable['<'] = _mKeyColorMapTable[key];
+            else if (PAL::KeyMapTable[key] == ">") _mGameKeyHighlightTable['>'] = _mKeyColorMapTable[key];
+            else if (PAL::KeyMapTable[key] == "^") _mGameKeyHighlightTable['^'] = _mKeyColorMapTable[key];
+            else if (PAL::KeyMapTable[key] == "v") _mGameKeyHighlightTable['v'] = _mKeyColorMapTable[key];
+            else if (PAL::KeyMapTable[key] == "X") _mGameKeyHighlightTable['x'] = _mKeyColorMapTable[key];
+            else if (PAL::KeyMapTable[key] == "A") _mGameKeyHighlightTable['a'] = _mKeyColorMapTable[key];
+            else if (PAL::KeyMapTable[key] == "B") _mGameKeyHighlightTable['b'] = _mKeyColorMapTable[key];
+            else if (PAL::KeyMapTable[key] == "Y") _mGameKeyHighlightTable['y'] = _mKeyColorMapTable[key];
+        } else {
+            // keyboard
+            if (PAL::KeyMapTable[key] == "W") _mGameKeyHighlightTable['W'] = _mKeyColorMapTable[key];
+            else if (PAL::KeyMapTable[key] == "A") _mGameKeyHighlightTable['A'] = _mKeyColorMapTable[key];
+            else if (PAL::KeyMapTable[key] == "S") _mGameKeyHighlightTable['S'] = _mKeyColorMapTable[key];
+            else if (PAL::KeyMapTable[key] == "D") _mGameKeyHighlightTable['D'] = _mKeyColorMapTable[key];
+        }
     }
 }
 
 
 void KeyHistory::_drawBasicInfoImpl() {
+    ImGui::GetIO().ConfigFlags &= ~ImGuiConfigFlags_NavEnableGamepad; // disable gamepad input
     ImGui::Text("Window FPS: %.2f", ImGui::GetIO().Framerate);
     ImGui::Text("Real Key-Detect FPS: %.2f", TargetWindowKeyDetect::getInstance().getRealDetectFPS());
     ImGui::Separator();

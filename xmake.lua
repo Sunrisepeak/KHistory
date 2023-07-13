@@ -31,4 +31,5 @@ target("khistory")
 
 target("khistory-test")
     set_kind("binary")
+    add_files("src/PAL.cpp")
     add_files("tests/test.cpp")

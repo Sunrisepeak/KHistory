@@ -88,7 +88,7 @@ void TargetWindowKeyDetect::__detectKeyInfoThreadFunc() {
             auto keyEventVec = PAL::platformKeyDetect(__mTargetWindowInfo.id);
             // handle key event and update __mKeyPressMapTable
             for (auto &keyEvent : keyEventVec) {
-                if (keyEvent.key > 0 && keyEvent.key < 256) {
+                if (keyEvent.key >= 0 && keyEvent.key < 256) {
                     //std::cout << keyEvent.key << " " << keyEvent.pressed << std::endl;
                     __mKeyPressMapTable[keyEvent.key] = keyEvent.pressed;
                 }
