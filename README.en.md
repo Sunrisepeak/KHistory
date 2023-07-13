@@ -1,6 +1,6 @@
 # KHistory
 
-**History** is an **elegant** tool for detecting/history-recording keystrokes.
+**KHistory** is an **elegant** keystrokes detection tools
 
 [**中文**](README.md)
 
@@ -8,7 +8,7 @@
 
 ### Single file, don't need install, run directly
 
-> **get last-version of your platform from release**
+> **get last-version of your platform from [Release](https://github.com/Sunrisepeak/KHistory/releases)**
 
 
 
