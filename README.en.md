@@ -1,6 +1,6 @@
 # KHistory
 
-**History** is an **elegant** tool for detecting/history-recording keystrokes.
+**KHistory** is an **elegant** keystrokes detection tools
 
 [**中文**](README.md)
 
