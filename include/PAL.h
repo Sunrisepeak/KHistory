@@ -19,8 +19,8 @@ public: // type
         X              = 0x0008,
         Y              = 0x000A,
 
-        LEFT_SHOULDER  = 0x0003,
-        RIGHT_SHOULDER = 0x0006,
+        LEFT_BUMPER  = 0x0003,
+        RIGHT_BUMPER = 0x0006,
         LEFT_TRIGGER   = 0x0009,
         RIGHT_TRIGGER  = 0x000B,
 
