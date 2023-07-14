@@ -102,8 +102,8 @@ dstruct::Vector<PAL::KeyData> PAL::platformKeyDetect(unsigned int wID) {
                 keyDatas.push({GamepadKey::DPAD_RIGHT, 0 != (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_RIGHT)});
                 keyDatas.push({GamepadKey::START, 0 != (state.Gamepad.wButtons & XINPUT_GAMEPAD_START)});
                 keyDatas.push({GamepadKey::BACK, 0 != (state.Gamepad.wButtons & XINPUT_GAMEPAD_BACK)});
-                keyDatas.push({GamepadKey::LEFT_SHOULDER, 0 != (state.Gamepad.wButtons & XINPUT_GAMEPAD_LEFT_SHOULDER)});
-                keyDatas.push({GamepadKey::RIGHT_SHOULDER, 0 != (state.Gamepad.wButtons & XINPUT_GAMEPAD_RIGHT_SHOULDER)});
+                keyDatas.push({GamepadKey::LEFT_BUMPER, 0 != (state.Gamepad.wButtons & XINPUT_GAMEPAD_LEFT_BUMPER)});
+                keyDatas.push({GamepadKey::RIGHT_BUMPER, 0 != (state.Gamepad.wButtons & XINPUT_GAMEPAD_RIGHT_BUMPER)});
                 keyDatas.push({GamepadKey::A, 0 != (state.Gamepad.wButtons & XINPUT_GAMEPAD_A)});
                 keyDatas.push({GamepadKey::B, 0 != (state.Gamepad.wButtons & XINPUT_GAMEPAD_B)});
                 keyDatas.push({GamepadKey::X, 0 != (state.Gamepad.wButtons & XINPUT_GAMEPAD_X)});

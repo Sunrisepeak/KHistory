@@ -19,8 +19,8 @@ void PAL::__gamepadKeyDefaultMap() {
     KeyMapTable[GamepadKey::DPAD_RIGHT]     = ">";
     KeyMapTable[GamepadKey::START]          = "START";
     KeyMapTable[GamepadKey::BACK]           = "BACK";
-    KeyMapTable[GamepadKey::LEFT_SHOULDER]  = "LS";
-    KeyMapTable[GamepadKey::RIGHT_SHOULDER] = "RS";
+    KeyMapTable[GamepadKey::LEFT_BUMPER]  = "LB";
+    KeyMapTable[GamepadKey::RIGHT_BUMPER] = "RB";
     KeyMapTable[GamepadKey::A]              = "A";
     KeyMapTable[GamepadKey::B]              = "B";
     KeyMapTable[GamepadKey::X]              = "X";
