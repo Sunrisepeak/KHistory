@@ -1,6 +1,6 @@
 add_rules("mode.debug", "mode.release")
 
-set_project("key-history")
+set_project("khistory")
 
 set_languages("cxx17")
 
@@ -22,7 +22,7 @@ else
     add_links("X11")
 end
 
--- config key-history include path
+-- config khistory include path
 add_includedirs("include")
 
 target("khistory")

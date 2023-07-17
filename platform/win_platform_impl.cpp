@@ -20,7 +20,7 @@ namespace khistory {
 static HHOOK gKeyboardHook;
 static unsigned int gTargetWindowID;
 std::mutex gKeyEventMutex;
-dstruct::Queue<PAL::KeyData> gKeyEventQ;
+dstruct::adapter::Queue<PAL::KeyData, dstruct::DLinkedList<PAL::KeyData>> gKeyEventQ;
 
 std::string tcharToString(const TCHAR* tcharArray);
 LRESULT CALLBACK KeyboardHookProc(int nCode, WPARAM wParam, LPARAM lParam); // keyboard hook
@@ -30,8 +30,7 @@ void PAL::platformInit() {
     gTargetWindowID = 0;
     gKeyboardHook = SetWindowsHookEx(WH_KEYBOARD_LL, KeyboardHookProc, NULL, 0);
     DSTRUCT_ASSERT(gKeyboardHook != NULL);
-    // init KeyMapTable
-    KeyMapTable.resize(256, "");
+    // init KeyMapTable keyboard
     TCHAR  keyName[256] = { 0 };
     for (int i = 0; i < 256; i++) {
         int result = GetKeyNameText(i << 16, keyName, sizeof(keyName));
@@ -39,7 +38,7 @@ void PAL::platformInit() {
             KeyMapTable[i] = tcharToString(keyName);
         }
     }
-
+    // init KeyMapTable gamepad
     PAL::__gamepadKeyDefaultMap();
 
     // close win console
@@ -78,7 +77,7 @@ dstruct::Vector<PAL::KeyData> PAL::platformKeyDetect(unsigned int wID) {
     dstruct::Vector<PAL::KeyData> keyDatas;
 
     if (gTargetWindowID != wID) {
-        printf("target window from %d %d", gTargetWindowID, wID);
+        printf("target window from %d to %d\n", gTargetWindowID, wID);
         gTargetWindowID = wID;
     }
 
@@ -116,6 +115,7 @@ dstruct::Vector<PAL::KeyData> PAL::platformKeyDetect(unsigned int wID) {
                 // thumb
                 keyDatas.push({GamepadKey::LEFT_THUMB, 0 != (state.Gamepad.wButtons & XINPUT_GAMEPAD_LEFT_THUMB)});
                 keyDatas.push({GamepadKey::RIGHT_THUMB, 0 != (state.Gamepad.wButtons & XINPUT_GAMEPAD_RIGHT_THUMB)});
+                break;
             }
             //printf("gamepad-id %d, connect: %d\n", i, connected);
         }
@@ -125,7 +125,7 @@ dstruct::Vector<PAL::KeyData> PAL::platformKeyDetect(unsigned int wID) {
     if (!PAL::gamepadConnected) {   // keyboard
         MSG msg; // translate msg to hook func
         int msgLimit = 10;
-        if (PeekMessage(&msg, reinterpret_cast<HWND>(gTargetWindowID), 0, 0, PM_REMOVE) > 0 && msgLimit--) {
+        while (PeekMessage(&msg, reinterpret_cast<HWND>(gTargetWindowID), 0, 0, PM_REMOVE) > 0 && msgLimit--) {
             TranslateMessage(&msg);
             DispatchMessage(&msg);
         }

@@ -1,9 +1,14 @@
-#include <iostream>
+#include "PAL.h"
+
+// std
 #include <cstdio>
+
+// dstruct
 #include <dstruct.hpp>
+
+// X11
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
-#include "PAL.h"
 
 namespace khistory {
 
@@ -61,7 +66,6 @@ void PAL::platformInit() {
     DSTRUCT_ASSERT(display != nullptr);
 
     // init key map table
-    PAL::KeyMapTable.resize(256, "");
     for (int keycode = 0; keycode < 256; keycode++) {
         char *keyName = XKeysymToString(XKeycodeToKeysym(display, keycode, 0));
         if (keyName) PAL::KeyMapTable[keycode] = keyName;

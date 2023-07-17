@@ -1,6 +1,5 @@
-#include <iostream>
+#include <dsvisual.hpp>
 
-#include "PAL.h"
 #include "KeyHistory.h"
 
 int main() {

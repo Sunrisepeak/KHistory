@@ -69,7 +69,7 @@ void TargetWindowKeyDetect::setPressedKey(int index, bool pressed) {
 
 dstruct::Vector<int> TargetWindowKeyDetect::getPressedKeyVec() const {
     dstruct::Vector<int> ans;
-    for (int i = 0; i < 256; i++) {
+    for (int i = 0; i < KEY_NUMBERS; i++) {
         if (__mKeyPressMapTable[i])
             ans.push(i);
     }
@@ -89,8 +89,8 @@ void TargetWindowKeyDetect::__detectKeyInfoThreadFunc() {
                 auto keyEventVec = PAL::platformKeyDetect(__mTargetWindowInfo.id);
                 // handle key event and update __mKeyPressMapTable
                 for (auto &keyEvent : keyEventVec) {
-                    if (keyEvent.key >= 0 && keyEvent.key < 256) {
-                        //std::cout << keyEvent.key << " " << keyEvent.pressed << std::endl;
+                    //std::cout << keyEvent.key << " " << keyEvent.pressed << std::endl;
+                    if (keyEvent.key >= 0 && keyEvent.key < KEY_NUMBERS) {
                         __mKeyPressMapTable[keyEvent.key] = keyEvent.pressed;
                     }
                 }
