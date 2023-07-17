@@ -78,39 +78,43 @@ dstruct::Vector<int> TargetWindowKeyDetect::getPressedKeyVec() const {
 
 void TargetWindowKeyDetect::__detectKeyInfoThreadFunc() {
     // 初始化计时器
-    auto startTime = std::chrono::high_resolution_clock::now();
-    int frameCount = 0;
-    int frameBalanceOffset = 0;
-    while (!__mExitDetect) {
-        if (__mTargetWindowInfo.id != 0) {
-            // block detect ?
-            auto keyEventVec = PAL::platformKeyDetect(__mTargetWindowInfo.id);
-            // handle key event and update __mKeyPressMapTable
-            for (auto &keyEvent : keyEventVec) {
-                if (keyEvent.key >= 0 && keyEvent.key < 256) {
-                    //std::cout << keyEvent.key << " " << keyEvent.pressed << std::endl;
-                    __mKeyPressMapTable[keyEvent.key] = keyEvent.pressed;
+    khistory::PAL::platformInit();
+    {
+        auto startTime = std::chrono::high_resolution_clock::now();
+        int frameCount = 0;
+        int frameBalanceOffset = 0;
+        while (!__mExitDetect) {
+            if (__mTargetWindowInfo.id != 0) {
+                // block detect ?
+                auto keyEventVec = PAL::platformKeyDetect(__mTargetWindowInfo.id);
+                // handle key event and update __mKeyPressMapTable
+                for (auto &keyEvent : keyEventVec) {
+                    if (keyEvent.key >= 0 && keyEvent.key < 256) {
+                        //std::cout << keyEvent.key << " " << keyEvent.pressed << std::endl;
+                        __mKeyPressMapTable[keyEvent.key] = keyEvent.pressed;
+                    }
+                }
+            }
+            std::this_thread::sleep_for(std::chrono::microseconds((1000 * 1000) / (__mDetectFPS + frameBalanceOffset)));
+            { // compute detect fps
+                auto currentTime = std::chrono::high_resolution_clock::now();
+                float frameTime = std::chrono::duration<float, std::chrono::seconds::period>(currentTime - startTime).count();
+
+                frameCount++;
+
+                if (frameTime >= 1.0f) {
+                    __mRealDetectFPS = frameCount / frameTime;
+                    // dynamic balance
+                    frameBalanceOffset += ((__mRealDetectFPS - __mDetectFPS < -5) + (__mRealDetectFPS - __mDetectFPS > 5) * -1) * 2;
+                    //std::cout << frameBalanceOffset << std::endl;
+                    // reset
+                    startTime = currentTime;
+                    frameCount = 0;
                 }
             }
         }
-        std::this_thread::sleep_for(std::chrono::microseconds((1000 * 1000) / (__mDetectFPS + frameBalanceOffset)));
-        { // compute detect fps
-            auto currentTime = std::chrono::high_resolution_clock::now();
-            float frameTime = std::chrono::duration<float, std::chrono::seconds::period>(currentTime - startTime).count();
-
-            frameCount++;
-
-            if (frameTime >= 1.0f) {
-                __mRealDetectFPS = frameCount / frameTime;
-                // dynamic balance
-                frameBalanceOffset += ((__mRealDetectFPS - __mDetectFPS < -5) + (__mRealDetectFPS - __mDetectFPS > 5) * -1) * 2;
-                //std::cout << frameBalanceOffset << std::endl;
-                // reset
-                startTime = currentTime;
-                frameCount = 0;
-            }
-        }
     }
+    khistory::PAL::platformDeinit();
 }
 
 }
