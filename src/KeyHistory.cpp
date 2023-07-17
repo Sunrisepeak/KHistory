@@ -16,7 +16,9 @@ KeyHistory::KeyHistory() {
         _mKeyHistoryQueue.push({{}, 0});
     }
     // generator: key color table
-    _mKeyColorMapTable.resize(256, ImVec4(0, 0, 0, 0.5));
+    _mKeyColorMapTable.resize(KEY_NUMBERS, ImVec4(0, 0, 0, 0.5));
+
+    // keyboard key-color init
     int colorIndex = 0;
     for (int r = 0; r < 16; r += 2) { // 8
         for (int g = 0; g < 16; g += 2) {  // 8
@@ -25,7 +27,27 @@ KeyHistory::KeyHistory() {
             }
         }
     }
-    _mGameKeyHighlightTable.resize(256, ImVec4(0, 0, 0, 0.25));
+
+    // gamepad key-color init
+    _mKeyColorMapTable[PAL::GamepadKey::DPAD_UP]        = ImVec4(229 / 255.0f, 153 / 255.0f, 1.0f, 0.5f);
+    _mKeyColorMapTable[PAL::GamepadKey::DPAD_DOWN]      = ImVec4(229 / 255.0f, 153 / 255.0f, 1.0f, 0.5f);
+    _mKeyColorMapTable[PAL::GamepadKey::DPAD_LEFT]      = ImVec4(229 / 255.0f, 153 / 255.0f, 1.0f, 0.5f);
+    _mKeyColorMapTable[PAL::GamepadKey::DPAD_RIGHT]     = ImVec4(229 / 255.0f, 153 / 255.0f, 1.0f, 0.5f);
+
+    _mKeyColorMapTable[PAL::GamepadKey::START]          = ImVec4(0.6f, 0.7f, 0.8f, 0.5f);
+    _mKeyColorMapTable[PAL::GamepadKey::BACK]           = ImVec4(0.6f, 0.7f, 0.8f, 0.5f);
+
+    _mKeyColorMapTable[PAL::GamepadKey::A]              = ImVec4(178 / 255.0f, 1.0f, 102 / 255.0f, 0.5f);
+    _mKeyColorMapTable[PAL::GamepadKey::B]              = ImVec4(255 / 255.0f, 102 / 255.0f, 102 / 255.0f, 0.5f);
+    _mKeyColorMapTable[PAL::GamepadKey::X]              = ImVec4(0.0f, 1.0f, 1.0f, 0.5f);
+    _mKeyColorMapTable[PAL::GamepadKey::Y]              = ImVec4(1.0f, 1.0f, 0.0f, 0.5f);
+
+    _mKeyColorMapTable[PAL::GamepadKey::LEFT_BUMPER]    = ImVec4(0.0f, 0.0f, 1.0f, 0.5f);
+    _mKeyColorMapTable[PAL::GamepadKey::RIGHT_BUMPER]   = ImVec4(0.0f, 0.0f, 1.0f, 0.5f);
+    _mKeyColorMapTable[PAL::GamepadKey::LEFT_TRIGGER]   = ImVec4(1.0f, 0.0f, 0.0f, 0.5f);
+    _mKeyColorMapTable[PAL::GamepadKey::RIGHT_TRIGGER]  = ImVec4(1.0f, 0.0f, 0.0f, 0.5f);
+
+    _mGameKeyHighlightTable.resize(KEY_NUMBERS, ImVec4(0, 0, 0, 0.25));
 }
 
 void KeyHistory::setTransparency(int transparency) {
@@ -104,7 +126,7 @@ void KeyHistory::__gameKeyVisualImpl() {
 }
 
 void KeyHistory::__updateGameKeyHighlightVec(const __KeyData &kd) {
-    _mGameKeyHighlightTable.resize(256, ImVec4(0, 0, 0, 0.25));
+    _mGameKeyHighlightTable.resize(KEY_NUMBERS, ImVec4(0, 0, 0, 0.25));
     // keyboard
     for (auto key : kd.keyVec) {
         if (PAL::gamepadConnected) { // use lowercase for gamepad

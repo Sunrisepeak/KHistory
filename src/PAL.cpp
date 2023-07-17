@@ -1,6 +1,6 @@
 #include "PAL.h"
 
-dstruct::Vector<std::string> khistory::PAL::KeyMapTable;
+dstruct::Vector<std::string> khistory::PAL::KeyMapTable(KEY_NUMBERS, "");
 bool khistory::PAL::gamepadConnected = false;
 
 namespace khistory {
@@ -19,14 +19,14 @@ void PAL::__gamepadKeyDefaultMap() {
     KeyMapTable[GamepadKey::DPAD_RIGHT]     = ">";
     KeyMapTable[GamepadKey::START]          = "START";
     KeyMapTable[GamepadKey::BACK]           = "BACK";
-    KeyMapTable[GamepadKey::LEFT_BUMPER]  = "LB";
-    KeyMapTable[GamepadKey::RIGHT_BUMPER] = "RB";
     KeyMapTable[GamepadKey::A]              = "A";
     KeyMapTable[GamepadKey::B]              = "B";
     KeyMapTable[GamepadKey::X]              = "X";
     KeyMapTable[GamepadKey::Y]              = "Y";
 
-    // L/R trigger
+    // L/R trigger/Bumper
+    KeyMapTable[GamepadKey::LEFT_BUMPER]    = "LB";
+    KeyMapTable[GamepadKey::RIGHT_BUMPER]   = "RB";
     KeyMapTable[GamepadKey::LEFT_TRIGGER]   = "LT";
     KeyMapTable[GamepadKey::RIGHT_TRIGGER]  = "RT";
 

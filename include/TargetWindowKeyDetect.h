@@ -33,7 +33,7 @@ private:
     void __detectKeyInfoThreadFunc();
 private:
     bool __mExitDetect;
-    bool __mKeyPressMapTable[256]; // gamepad and keyboard key-status
+    bool __mKeyPressMapTable[KEY_NUMBERS]; // gamepad and keyboard key-status
     int __mDetectFPS;
     float __mRealDetectFPS;
     PAL::WindowInfo __mTargetWindowInfo;
