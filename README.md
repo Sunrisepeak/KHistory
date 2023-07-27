@@ -47,8 +47,6 @@
 
 ## 四、演示
 
-> **使用介绍/开发动向 视频分享 -〉[地址](https://space.bilibili.com/65858958/channel/seriesdetail?sid=3473247)**
-
 ### 键盘按键检测
 ![](docs/imgs/khistory-keyboard.demo.gif)
 
@@ -56,8 +54,15 @@
 ![](docs/imgs/khistory-gamepad.demo.gif)
 
 
+## 五、相关视频
 
-## 五、相关链接
+> **更多介绍/开发动向 视频分享 -〉[地址](https://space.bilibili.com/65858958/channel/seriesdetail?sid=3473247)**
+
+- [开源软件: KHistory 按键检测及历史记录显示工具介绍](https://www.bilibili.com/video/BV1Xx4y1o7cp)
+- [KHistory: 街霸6 让一追二 使用C语言打出”高光”操作](https://www.bilibili.com/video/BV1W14y1X7vD)
+
+
+## 六、相关链接
 
 - [**KHistory**](https://github.com/Sunrisepeak/KHistory)
 - [**DSVisual**](https://github.com/Sunrisepeak/DSVisual)
