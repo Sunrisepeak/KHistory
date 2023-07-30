@@ -14,6 +14,8 @@ add_includedirs("third-party/DStruct")
 
 -- config os platform
 if is_host("windows") then
+    add_ldflags("-subsystem:windows")
+    add_ldflags("-entry:mainCRTStartup", {force = true})
     add_files("platform/win_platform_impl.cpp")
 elseif is_host("macosx") then
     add_files("platform/mac_platform_impl.cpp")
@@ -28,8 +30,9 @@ add_includedirs("include")
 target("khistory")
     set_kind("binary")
     add_files("src/*.cpp")
-
+--[[
 target("khistory-test")
     set_kind("binary")
     add_files("src/PAL.cpp")
     add_files("tests/test.cpp")
+--]]

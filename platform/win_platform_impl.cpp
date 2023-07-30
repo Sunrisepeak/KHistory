@@ -42,8 +42,8 @@ void PAL::platformInit() {
     PAL::__gamepadKeyDefaultMap();
 
     // close win console
-    HWND hwnd = GetConsoleWindow();
-    if (hwnd != NULL) ShowWindow(hwnd, SW_HIDE);
+    //HWND hwnd = GetConsoleWindow();
+    //if (hwnd != NULL) ShowWindow(hwnd, SW_HIDE);
 }
 
 dstruct::Vector<PAL::WindowInfo> PAL::platformWindowInfos() {
