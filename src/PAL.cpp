@@ -13,26 +13,26 @@ std::string PAL::WindowInfo::toString() const {
 }
 
 void PAL::__gamepadKeyDefaultMap() {
-    KeyMapTable[GamepadKey::DPAD_UP]        = "^";
-    KeyMapTable[GamepadKey::DPAD_DOWN]      = "v";
-    KeyMapTable[GamepadKey::DPAD_LEFT]      = "<";
-    KeyMapTable[GamepadKey::DPAD_RIGHT]     = ">";
-    KeyMapTable[GamepadKey::START]          = "START";
-    KeyMapTable[GamepadKey::BACK]           = "BACK";
-    KeyMapTable[GamepadKey::A]              = "A";
-    KeyMapTable[GamepadKey::B]              = "B";
-    KeyMapTable[GamepadKey::X]              = "X";
-    KeyMapTable[GamepadKey::Y]              = "Y";
+    KeyMapTable[KEYBOARD_KEY_NUMBERS + GamepadKey::DPAD_UP]        = "^";
+    KeyMapTable[KEYBOARD_KEY_NUMBERS + GamepadKey::DPAD_DOWN]      = "v";
+    KeyMapTable[KEYBOARD_KEY_NUMBERS + GamepadKey::DPAD_LEFT]      = "<";
+    KeyMapTable[KEYBOARD_KEY_NUMBERS + GamepadKey::DPAD_RIGHT]     = ">";
+    KeyMapTable[KEYBOARD_KEY_NUMBERS + GamepadKey::START]          = "START";
+    KeyMapTable[KEYBOARD_KEY_NUMBERS + GamepadKey::BACK]           = "BACK";
+    KeyMapTable[KEYBOARD_KEY_NUMBERS + GamepadKey::A]              = "A";
+    KeyMapTable[KEYBOARD_KEY_NUMBERS + GamepadKey::B]              = "B";
+    KeyMapTable[KEYBOARD_KEY_NUMBERS + GamepadKey::X]              = "X";
+    KeyMapTable[KEYBOARD_KEY_NUMBERS + GamepadKey::Y]              = "Y";
 
     // L/R trigger/Bumper
-    KeyMapTable[GamepadKey::LEFT_BUMPER]    = "LB";
-    KeyMapTable[GamepadKey::RIGHT_BUMPER]   = "RB";
-    KeyMapTable[GamepadKey::LEFT_TRIGGER]   = "LT";
-    KeyMapTable[GamepadKey::RIGHT_TRIGGER]  = "RT";
+    KeyMapTable[KEYBOARD_KEY_NUMBERS + GamepadKey::LEFT_BUMPER]    = "LB";
+    KeyMapTable[KEYBOARD_KEY_NUMBERS + GamepadKey::RIGHT_BUMPER]   = "RB";
+    KeyMapTable[KEYBOARD_KEY_NUMBERS + GamepadKey::LEFT_TRIGGER]   = "LT";
+    KeyMapTable[KEYBOARD_KEY_NUMBERS + GamepadKey::RIGHT_TRIGGER]  = "RT";
 
     // thumb
-    KeyMapTable[GamepadKey::LEFT_THUMB]     = "LEFT_THUMB";
-    KeyMapTable[GamepadKey::RIGHT_THUMB]    = "RIGHT_THUMB";
+    KeyMapTable[KEYBOARD_KEY_NUMBERS + GamepadKey::LEFT_THUMB]     = "LEFT_THUMB";
+    KeyMapTable[KEYBOARD_KEY_NUMBERS + GamepadKey::RIGHT_THUMB]    = "RIGHT_THUMB";
 }
 
 }

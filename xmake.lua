@@ -26,6 +26,7 @@ end
 
 -- config khistory include path
 add_includedirs("include")
+add_includedirs("kplugin")
 
 target("khistory")
     set_kind("binary")

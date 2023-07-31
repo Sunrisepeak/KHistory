@@ -4,8 +4,9 @@
 namespace khistory {
 
 dstruct::Vector<ImVec4> KeyHistory::_mKeyColorMapTable;
+dstruct::Vector<KPluginInterface *> KeyHistory::_mPluginVec;
 
-KeyHistory::KeyHistory() {
+KeyHistory::KeyHistory() : _mCurrentPluginIndex { 0 } {
     _mName = "KeyHistory";
     _mHistoryNums = 5;
     _mKeyDetectFPS = 60;
@@ -29,125 +30,36 @@ KeyHistory::KeyHistory() {
     }
 
     // gamepad key-color init
-    _mKeyColorMapTable[PAL::GamepadKey::DPAD_UP]        = ImVec4(229 / 255.0f, 153 / 255.0f, 1.0f, 0.5f);
-    _mKeyColorMapTable[PAL::GamepadKey::DPAD_DOWN]      = ImVec4(229 / 255.0f, 153 / 255.0f, 1.0f, 0.5f);
-    _mKeyColorMapTable[PAL::GamepadKey::DPAD_LEFT]      = ImVec4(229 / 255.0f, 153 / 255.0f, 1.0f, 0.5f);
-    _mKeyColorMapTable[PAL::GamepadKey::DPAD_RIGHT]     = ImVec4(229 / 255.0f, 153 / 255.0f, 1.0f, 0.5f);
+    _mKeyColorMapTable[KEYBOARD_KEY_NUMBERS + PAL::GamepadKey::DPAD_UP]        = ImVec4(229 / 255.0f, 153 / 255.0f, 1.0f, 0.5f);
+    _mKeyColorMapTable[KEYBOARD_KEY_NUMBERS + PAL::GamepadKey::DPAD_DOWN]      = ImVec4(229 / 255.0f, 153 / 255.0f, 1.0f, 0.5f);
+    _mKeyColorMapTable[KEYBOARD_KEY_NUMBERS + PAL::GamepadKey::DPAD_LEFT]      = ImVec4(229 / 255.0f, 153 / 255.0f, 1.0f, 0.5f);
+    _mKeyColorMapTable[KEYBOARD_KEY_NUMBERS + PAL::GamepadKey::DPAD_RIGHT]     = ImVec4(229 / 255.0f, 153 / 255.0f, 1.0f, 0.5f);
 
-    _mKeyColorMapTable[PAL::GamepadKey::START]          = ImVec4(0.6f, 0.7f, 0.8f, 0.5f);
-    _mKeyColorMapTable[PAL::GamepadKey::BACK]           = ImVec4(0.6f, 0.7f, 0.8f, 0.5f);
+    _mKeyColorMapTable[KEYBOARD_KEY_NUMBERS + PAL::GamepadKey::START]          = ImVec4(0.6f, 0.7f, 0.8f, 0.5f);
+    _mKeyColorMapTable[KEYBOARD_KEY_NUMBERS + PAL::GamepadKey::BACK]           = ImVec4(0.6f, 0.7f, 0.8f, 0.5f);
 
-    _mKeyColorMapTable[PAL::GamepadKey::A]              = ImVec4(178 / 255.0f, 1.0f, 102 / 255.0f, 0.5f);
-    _mKeyColorMapTable[PAL::GamepadKey::B]              = ImVec4(255 / 255.0f, 102 / 255.0f, 102 / 255.0f, 0.5f);
-    _mKeyColorMapTable[PAL::GamepadKey::X]              = ImVec4(0.0f, 1.0f, 1.0f, 0.5f);
-    _mKeyColorMapTable[PAL::GamepadKey::Y]              = ImVec4(1.0f, 1.0f, 0.0f, 0.5f);
+    _mKeyColorMapTable[KEYBOARD_KEY_NUMBERS + PAL::GamepadKey::A]              = ImVec4(178 / 255.0f, 1.0f, 102 / 255.0f, 0.5f);
+    _mKeyColorMapTable[KEYBOARD_KEY_NUMBERS + PAL::GamepadKey::B]              = ImVec4(255 / 255.0f, 102 / 255.0f, 102 / 255.0f, 0.5f);
+    _mKeyColorMapTable[KEYBOARD_KEY_NUMBERS + PAL::GamepadKey::X]              = ImVec4(0.0f, 1.0f, 1.0f, 0.5f);
+    _mKeyColorMapTable[KEYBOARD_KEY_NUMBERS + PAL::GamepadKey::Y]              = ImVec4(1.0f, 1.0f, 0.0f, 0.5f);
 
-    _mKeyColorMapTable[PAL::GamepadKey::LEFT_BUMPER]    = ImVec4(0.0f, 0.0f, 1.0f, 0.5f);
-    _mKeyColorMapTable[PAL::GamepadKey::RIGHT_BUMPER]   = ImVec4(0.0f, 0.0f, 1.0f, 0.5f);
-    _mKeyColorMapTable[PAL::GamepadKey::LEFT_TRIGGER]   = ImVec4(1.0f, 0.0f, 0.0f, 0.5f);
-    _mKeyColorMapTable[PAL::GamepadKey::RIGHT_TRIGGER]  = ImVec4(1.0f, 0.0f, 0.0f, 0.5f);
+    _mKeyColorMapTable[KEYBOARD_KEY_NUMBERS + PAL::GamepadKey::LEFT_BUMPER]    = ImVec4(0.0f, 0.0f, 1.0f, 0.5f);
+    _mKeyColorMapTable[KEYBOARD_KEY_NUMBERS + PAL::GamepadKey::RIGHT_BUMPER]   = ImVec4(0.0f, 0.0f, 1.0f, 0.5f);
+    _mKeyColorMapTable[KEYBOARD_KEY_NUMBERS + PAL::GamepadKey::LEFT_TRIGGER]   = ImVec4(1.0f, 0.0f, 0.0f, 0.5f);
+    _mKeyColorMapTable[KEYBOARD_KEY_NUMBERS + PAL::GamepadKey::RIGHT_TRIGGER]  = ImVec4(1.0f, 0.0f, 0.0f, 0.5f);
 
-    _mGameKeyHighlightTable.resize(KEY_NUMBERS, ImVec4(0, 0, 0, 0.25));
 }
 
 void KeyHistory::setTransparency(int transparency) {
     _mTransparency = transparency % 101;
 }
 
-/*
-    +-----------------------------+
-    |    ^    |    W    |    Y    |
-    |  <   >  |  A   D  |  X   B  |
-    |    v    |    S    |    A    |
-    +-----------------------------+
-*/
-void KeyHistory::__gameKeyVisualImpl() {
-    ImGuiStyle& style = ImGui::GetStyle();
-    const float spacing = 2.0f;
-    auto oldSpacing = style.ItemSpacing;
-
-    style.ItemSpacing = ImVec2(spacing, spacing);
-
-    float areaHeight = ImGui::GetWindowHeight() / 3;
-    float areaWidth = ImGui::GetWindowWidth() / 3;
-    float bWidth = areaWidth / 4, bHeight = bWidth;
-
-    {
-        int firstLineAreaStart = areaWidth / 2 - bWidth / 2;
-
-        ImGui::SetCursorPosX(firstLineAreaStart);
-        ImGui::PushStyleColor(ImGuiCol_Button, _mGameKeyHighlightTable['^']); ImGui::Button("^", {bWidth, bHeight}); ImGui::PopStyleColor(1);
-        ImGui::SameLine();
-
-        ImGui::SetCursorPosX(areaWidth + firstLineAreaStart);
-        ImGui::PushStyleColor(ImGuiCol_Button, _mGameKeyHighlightTable['W']); ImGui::Button("W", {bWidth, bHeight}); ImGui::PopStyleColor(1);
-        ImGui::SameLine();
-
-        ImGui::SetCursorPosX(2 * areaWidth + firstLineAreaStart);
-        ImGui::PushStyleColor(ImGuiCol_Button, _mGameKeyHighlightTable['y']); ImGui::Button("Y", {bWidth, bHeight}); ImGui::PopStyleColor(1);
-    }
-    {
-        int secondLineAreaStart = bWidth / 2;
-        {
-            ImGui::SetCursorPosX(secondLineAreaStart);
-            ImGui::PushStyleColor(ImGuiCol_Button, _mGameKeyHighlightTable['<']); ImGui::Button("<", {bWidth, bHeight}); ImGui::PopStyleColor(1);
-            ImGui::SameLine();
-            ImGui::SetCursorPosX(secondLineAreaStart + bWidth * 2);
-            ImGui::PushStyleColor(ImGuiCol_Button, _mGameKeyHighlightTable['>']); ImGui::Button(">", {bWidth, bHeight}); ImGui::PopStyleColor(1);
-            ImGui::SameLine();
-        }
-        {
-            ImGui::SetCursorPosX(areaWidth + bWidth / 2 - spacing);
-            ImGui::PushStyleColor(ImGuiCol_Button, _mGameKeyHighlightTable['A']); ImGui::Button("A", {bWidth, bHeight}); ImGui::PopStyleColor(1);
-            ImGui::SameLine();
-            ImGui::PushStyleColor(ImGuiCol_Button, _mGameKeyHighlightTable['S']); ImGui::Button("S", {bWidth, bHeight}); ImGui::PopStyleColor(1);
-            ImGui::SameLine();
-            ImGui::PushStyleColor(ImGuiCol_Button, _mGameKeyHighlightTable['D']); ImGui::Button("D", {bWidth, bHeight}); ImGui::PopStyleColor(1);
-            ImGui::SameLine();
-        }
-        {
-            ImGui::SetCursorPosX(2 * areaWidth + secondLineAreaStart);
-            ImGui::PushStyleColor(ImGuiCol_Button, _mGameKeyHighlightTable['x']); ImGui::Button("X", {bWidth, bHeight}); ImGui::PopStyleColor(1);
-            ImGui::SameLine();
-            ImGui::SetCursorPosX(2 * areaWidth + secondLineAreaStart + bWidth * 2);
-            ImGui::PushStyleColor(ImGuiCol_Button, _mGameKeyHighlightTable['b']); ImGui::Button("B", {bWidth, bHeight}); ImGui::PopStyleColor(1);
-        }
-    }
-    {
-        int thirdLineAreaStart = areaWidth / 2 - bWidth / 2;
-        ImGui::SetCursorPosX(thirdLineAreaStart);
-        ImGui::PushStyleColor(ImGuiCol_Button, _mGameKeyHighlightTable['v']); ImGui::Button("v", {bWidth, bHeight}); ImGui::PopStyleColor(1);
-        ImGui::SameLine();
-        ImGui::SetCursorPosX(2 * areaWidth + thirdLineAreaStart);
-        ImGui::PushStyleColor(ImGuiCol_Button, _mGameKeyHighlightTable['a']); ImGui::Button("A", {bWidth, bHeight}); ImGui::PopStyleColor(1);
-    }
-
-    style.ItemSpacing = oldSpacing;
+int KeyHistory::_registerPlugin(KPluginInterface *plugin) {
+    plugin->gameKeyNameTableInit();
+    plugin->gameKeyColorTableInit();
+    _mPluginVec.push_back(plugin);
+    return 0;
 }
-
-void KeyHistory::__updateGameKeyHighlightVec(const __KeyData &kd) {
-    _mGameKeyHighlightTable.resize(KEY_NUMBERS, ImVec4(0, 0, 0, 0.25));
-    // keyboard
-    for (auto key : kd.keyVec) {
-        if (PAL::gamepadConnected) { // use lowercase for gamepad
-            if (PAL::KeyMapTable[key] == "<") _mGameKeyHighlightTable['<'] = _mKeyColorMapTable[key];
-            else if (PAL::KeyMapTable[key] == ">") _mGameKeyHighlightTable['>'] = _mKeyColorMapTable[key];
-            else if (PAL::KeyMapTable[key] == "^") _mGameKeyHighlightTable['^'] = _mKeyColorMapTable[key];
-            else if (PAL::KeyMapTable[key] == "v") _mGameKeyHighlightTable['v'] = _mKeyColorMapTable[key];
-            else if (PAL::KeyMapTable[key] == "X") _mGameKeyHighlightTable['x'] = _mKeyColorMapTable[key];
-            else if (PAL::KeyMapTable[key] == "A") _mGameKeyHighlightTable['a'] = _mKeyColorMapTable[key];
-            else if (PAL::KeyMapTable[key] == "B") _mGameKeyHighlightTable['b'] = _mKeyColorMapTable[key];
-            else if (PAL::KeyMapTable[key] == "Y") _mGameKeyHighlightTable['y'] = _mKeyColorMapTable[key];
-        } else {
-            // keyboard
-            if (PAL::KeyMapTable[key] == "W") _mGameKeyHighlightTable['W'] = _mKeyColorMapTable[key];
-            else if (PAL::KeyMapTable[key] == "A") _mGameKeyHighlightTable['A'] = _mKeyColorMapTable[key];
-            else if (PAL::KeyMapTable[key] == "S") _mGameKeyHighlightTable['S'] = _mKeyColorMapTable[key];
-            else if (PAL::KeyMapTable[key] == "D") _mGameKeyHighlightTable['D'] = _mKeyColorMapTable[key];
-        }
-    }
-}
-
 
 void KeyHistory::_drawBasicInfoImpl() {
     ImGui::GetIO().ConfigFlags &= ~ImGuiConfigFlags_NavEnableGamepad; // disable gamepad input
@@ -162,7 +74,7 @@ void KeyHistory::_drawBasicInfoImpl() {
 
 void KeyHistory::_drawVisualImpl() {
 
-    __gameKeyVisualImpl();
+    _mPluginVec[_mCurrentPluginIndex]->gameKeyLayoutVisualImpl();
 
     ImGui::Separator();
     {
@@ -184,7 +96,7 @@ void KeyHistory::_drawVisualImpl() {
             if (needUpdate) {
                 kd.keyVec = keyVec;
                 kd.time = 1;
-                __updateGameKeyHighlightVec(kd);
+                _mPluginVec[_mCurrentPluginIndex]->updateKeyStatus(keyVec);
             } else { 
                 _mKeyHistoryQueue.pop_back();
                 kd.time += 1;
@@ -240,9 +152,12 @@ void KeyHistory::_drawControlImpl() {
     }
     ImGui::Separator();
     {  
-        auto oldTargetWindow = TargetWindowKeyDetect::getInstance().getTargetWindow();
+        std::string windowName = "select a target window";
         auto highlight = ImVec4(1.f, 0.f, 0.f, 0.4f);
         static bool isListening = false;
+        auto oldTargetWindowName = TargetWindowKeyDetect::getInstance().getTargetWindow().toString();
+        
+        if (oldTargetWindowName != "") windowName = oldTargetWindowName;
         if (isListening) highlight = ImVec4(0.f, 1.0f, 0.f, .6f);
         ImGui::PushStyleColor(ImGuiCol_Button, highlight);
         if (ImGui::Button("Listen")) {
@@ -251,12 +166,13 @@ void KeyHistory::_drawControlImpl() {
         }
         ImGui::PopStyleColor(1);
         ImGui::SameLine();
-        if (ImGui::BeginCombo(" <- select", oldTargetWindow.toString().c_str(), 0)) {
+
+        if (ImGui::BeginCombo(" <- window", windowName.c_str(), 0)) {
             auto currentWindowList = TargetWindowKeyDetect::getInstance().getWindowInfoList();
             TargetWindowKeyDetect::getInstance().setTargetWindow({0, ""});
             isListening = false;
             for (int n = 0; n < currentWindowList.size(); n++) {
-                const bool is_selected = (oldTargetWindow.name == currentWindowList[n].name);
+                const bool is_selected = (windowName == currentWindowList[n].toString());
                 if (ImGui::Selectable(currentWindowList[n].toString().c_str(), is_selected)) {
                     TargetWindowKeyDetect::getInstance().setTargetWindow(currentWindowList[n]);
                     isListening = true;
@@ -268,22 +184,61 @@ void KeyHistory::_drawControlImpl() {
             ImGui::EndCombo();
         }
     }
-}
-
-void KeyHistory::_drawAboutImpl() {
-    ImGui::Text("Author: Sunrisepeak");
-    ImGui::Text("Desc: this is an opensource/cross-platform and free software");
-    ImGui::Text("OS: support WIN/Linux/MAC");
-    ImGui::Text("Github ID: Sunrisepeak");
-    ImGui::Text("Bilibili ID: sunrisepeak");
     ImGui::Separator();
     {
-        ImGui::PushID("xxx");
-        char input[256] = "ProjectLinks/MoreDetials: https://github.com/Sunrisepeak/KeyHistory";
-        ImGui::PushItemWidth(ImGui::GetWindowSize().x);
-        ImGui::InputText("", input, 256, ImGuiInputTextFlags_ReadOnly);
-        ImGui::PopItemWidth();
-        ImGui::PopID();
+        ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.0f, 0.5f, 1.0f, 0.5f));
+        if (ImGui::Button(" Next ")) {
+            if (_mPluginVec.size())
+                _mCurrentPluginIndex = (_mCurrentPluginIndex + 1) % _mPluginVec.size();
+        }
+        ImGui::PopStyleColor(1);
+        ImGui::SameLine();
+
+        std::string oldPluginName = "select a gamekey-visual plugin";
+        if (_mCurrentPluginIndex >= 0) oldPluginName = _mPluginVec[_mCurrentPluginIndex]->getPluginName();
+        if (ImGui::BeginCombo(" <- plugin", oldPluginName.c_str(), 0)) {
+            for (int i = 0; i < _mPluginVec.size(); i++) {
+                const bool is_selected = (oldPluginName == _mPluginVec[i]->getPluginName());
+                if (ImGui::Selectable(_mPluginVec[i]->getPluginName().c_str(), is_selected)) {
+                    _mCurrentPluginIndex = i;
+                }
+                if (is_selected) ImGui::SetItemDefaultFocus();
+            }
+            ImGui::EndCombo();
+        }
+    }
+}
+
+/*
+ Note:
+    Please don't modify or delete the about section of software
+    If you are a developer and have done secondary development(example: add a plugin) of the software,
+    you can add your info
+*/
+void KeyHistory::_drawAboutImpl() {
+    {
+        ImGui::Text("Author: Sunrisepeak");
+        ImGui::Text("Desc: this is an opensource/cross-platform and free software");
+        ImGui::Text("OS: support WIN/Linux/MAC");
+        ImGui::Text("Github ID: Sunrisepeak");
+        ImGui::Text("Bilibili ID: sunrisepeak");
+        ImGui::Separator();
+        {
+            ImGui::PushID("xxx");
+            char input[256] = "ProjectLinks/MoreDetials: https://github.com/Sunrisepeak/KeyHistory";
+            ImGui::PushItemWidth(ImGui::GetWindowSize().x);
+            ImGui::InputText("", input, 256, ImGuiInputTextFlags_ReadOnly);
+            ImGui::PopItemWidth();
+            ImGui::PopID();
+        }
+    }
+    ImGui::Separator();
+    if (ImGui::TreeNode("Contributor")) {
+        ImGui::Text("Sunrisepeak: author / maintainer");
+        //ImGui::Text("Your ID: Your Work about the software");
+        //ImGui::Text("Your ID: bugfix / ... ");
+        //ImGui::Text("Your ID: add xxx plugin / ...");
+        ImGui::TreePop();
     }
 }
 

@@ -2,11 +2,16 @@
 
 #include "KeyHistory.h"
 
+KPLUGIN_REGISTER(GamepadBasePlugin)
+KPLUGIN_REGISTER(GamepadBasePluginFighting)
+
 int main() {
     
     // config window
     dsvisual::PlatformManager::setRootWindowName("Key History @ Power by DSVisual");
-    dsvisual::PlatformManager::setRootWindowSize(860, 960);
+    dsvisual::PlatformManager::setRootWindowSize(860, 1080);
+
+    ImGui::GetIO().IniFilename = "";
 
     {// Note: auto create/destory khistory
         khistory::KeyHistory khistory;
