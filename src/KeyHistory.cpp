@@ -48,6 +48,7 @@ KeyHistory::KeyHistory() : _mCurrentPluginIndex { 0 } {
     _mKeyColorMapTable[KEYBOARD_KEY_NUMBERS + PAL::GamepadKey::LEFT_TRIGGER]   = ImVec4(1.0f, 0.0f, 0.0f, 0.5f);
     _mKeyColorMapTable[KEYBOARD_KEY_NUMBERS + PAL::GamepadKey::RIGHT_TRIGGER]  = ImVec4(1.0f, 0.0f, 0.0f, 0.5f);
 
+    DSTRUCT_ASSERT(_mPluginVec.empty() != true);
 }
 
 void KeyHistory::setTransparency(int transparency) {
@@ -188,14 +189,13 @@ void KeyHistory::_drawControlImpl() {
     {
         ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.0f, 0.5f, 1.0f, 0.5f));
         if (ImGui::Button(" Next ")) {
-            if (_mPluginVec.size())
+            if (!_mPluginVec.empty())
                 _mCurrentPluginIndex = (_mCurrentPluginIndex + 1) % _mPluginVec.size();
         }
         ImGui::PopStyleColor(1);
         ImGui::SameLine();
 
-        std::string oldPluginName = "select a gamekey-visual plugin";
-        if (_mCurrentPluginIndex >= 0) oldPluginName = _mPluginVec[_mCurrentPluginIndex]->getPluginName();
+        auto oldPluginName = _mPluginVec[_mCurrentPluginIndex]->getPluginName();
         if (ImGui::BeginCombo(" <- plugin", oldPluginName.c_str(), 0)) {
             for (int i = 0; i < _mPluginVec.size(); i++) {
                 const bool is_selected = (oldPluginName == _mPluginVec[i]->getPluginName());

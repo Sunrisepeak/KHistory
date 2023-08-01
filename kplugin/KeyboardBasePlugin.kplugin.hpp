@@ -82,7 +82,7 @@ public: // interface impl
             // keyboard
             if (PAL::KeyMapTable[keycode].size() == 1) { // only detect alpha
                 __mkeyStatusTable[PAL::KeyMapTable[keycode][0]] = true;
-            } else if (PAL::KeyMapTable[keycode] == "Space") {
+            } else if (PAL::KeyMapTable[keycode] == "Space" || PAL::KeyMapTable[keycode] == "SPACE") {
                 __mkeyStatusTable[' '] = true;
             }
         }

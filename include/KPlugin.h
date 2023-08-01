@@ -21,9 +21,9 @@ protected:
 
 } // namespace khistory end
 
+
 #define KPLUGIN_REGISTER(PLUGIN_TYPE) \
-    extern class khistory::##PLUGIN_TYPE; \
-    static khistory::##PLUGIN_TYPE __gPlugin##PLUGIN_TYPE; \
+    static khistory::PLUGIN_TYPE __gPlugin##PLUGIN_TYPE; \
     auto __gUnused##PLUGIN_TYPE = khistory::KeyHistory::_registerPlugin(&__gPlugin##PLUGIN_TYPE);
 
 #include "GamepadBasePlugin.kplugin.hpp"

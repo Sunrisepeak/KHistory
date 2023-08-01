@@ -2,20 +2,28 @@
 
 #include "KeyHistory.h"
 
+/*
+Issue: https://github.com/Sunrisepeak/KHistory/issues/6
+
 // customize plugin
 KPLUGIN_REGISTER(KeyboardBasePlugin)
 KPLUGIN_REGISTER(GamepadBasePlugin)
 
 // extend plugin
 KPLUGIN_REGISTER(GamepadBasePluginFighting) // base on GamepadBasePlugin
+*/
 
 int main() {
-
     // config window
     dsvisual::PlatformManager::setRootWindowName("Key History @ Power by DSVisual");
     dsvisual::PlatformManager::setRootWindowSize(860, 1080);
 
-    ImGui::GetIO().IniFilename = "";
+    // customize plugin
+    KPLUGIN_REGISTER(KeyboardBasePlugin)
+    KPLUGIN_REGISTER(GamepadBasePlugin)
+
+    // extend plugin
+    KPLUGIN_REGISTER(GamepadBasePluginFighting) // base on GamepadBasePlugin
 
     {// Note: auto create/destory khistory
         khistory::KeyHistory khistory;
