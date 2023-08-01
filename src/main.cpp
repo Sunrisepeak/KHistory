@@ -2,11 +2,15 @@
 
 #include "KeyHistory.h"
 
+// customize plugin
+KPLUGIN_REGISTER(KeyboardBasePlugin)
 KPLUGIN_REGISTER(GamepadBasePlugin)
-KPLUGIN_REGISTER(GamepadBasePluginFighting)
+
+// extend plugin
+KPLUGIN_REGISTER(GamepadBasePluginFighting) // base on GamepadBasePlugin
 
 int main() {
-    
+
     // config window
     dsvisual::PlatformManager::setRootWindowName("Key History @ Power by DSVisual");
     dsvisual::PlatformManager::setRootWindowSize(860, 1080);

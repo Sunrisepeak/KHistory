@@ -27,6 +27,8 @@ protected:
     auto __gUnused##PLUGIN_TYPE = khistory::KeyHistory::_registerPlugin(&__gPlugin##PLUGIN_TYPE);
 
 #include "GamepadBasePlugin.kplugin.hpp"
+#include "KeyboardBasePlugin.kplugin.hpp"
+
 #include "GamepadBasePlugin-Fighting.kplugin.hpp"
 
 #endif
