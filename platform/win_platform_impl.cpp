@@ -95,26 +95,26 @@ dstruct::Vector<PAL::KeyData> PAL::platformKeyDetect(unsigned int wID) {
             dwResult = XInputGetState(i, &state);
             if (dwResult == ERROR_SUCCESS) {
                 connected = true;
-                keyDatas.push({GamepadKey::DPAD_UP, 0 != (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_UP)});
-                keyDatas.push({GamepadKey::DPAD_DOWN, 0 != (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_DOWN)});
-                keyDatas.push({GamepadKey::DPAD_LEFT, 0 != (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_LEFT)});
-                keyDatas.push({GamepadKey::DPAD_RIGHT, 0 != (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_RIGHT)});
-                keyDatas.push({GamepadKey::START, 0 != (state.Gamepad.wButtons & XINPUT_GAMEPAD_START)});
-                keyDatas.push({GamepadKey::BACK, 0 != (state.Gamepad.wButtons & XINPUT_GAMEPAD_BACK)});
-                keyDatas.push({GamepadKey::LEFT_BUMPER, 0 != (state.Gamepad.wButtons & XINPUT_GAMEPAD_LEFT_SHOULDER)});
-                keyDatas.push({GamepadKey::RIGHT_BUMPER, 0 != (state.Gamepad.wButtons & XINPUT_GAMEPAD_RIGHT_SHOULDER)});
-                keyDatas.push({GamepadKey::A, 0 != (state.Gamepad.wButtons & XINPUT_GAMEPAD_A)});
-                keyDatas.push({GamepadKey::B, 0 != (state.Gamepad.wButtons & XINPUT_GAMEPAD_B)});
-                keyDatas.push({GamepadKey::X, 0 != (state.Gamepad.wButtons & XINPUT_GAMEPAD_X)});
-                keyDatas.push({GamepadKey::Y, 0 != (state.Gamepad.wButtons & XINPUT_GAMEPAD_Y)});
+                keyDatas.push({KEYBOARD_KEY_NUMBERS + GamepadKey::DPAD_UP, 0 != (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_UP)});
+                keyDatas.push({KEYBOARD_KEY_NUMBERS + GamepadKey::DPAD_DOWN, 0 != (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_DOWN)});
+                keyDatas.push({KEYBOARD_KEY_NUMBERS + GamepadKey::DPAD_LEFT, 0 != (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_LEFT)});
+                keyDatas.push({KEYBOARD_KEY_NUMBERS + GamepadKey::DPAD_RIGHT, 0 != (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_RIGHT)});
+                keyDatas.push({KEYBOARD_KEY_NUMBERS + GamepadKey::START, 0 != (state.Gamepad.wButtons & XINPUT_GAMEPAD_START)});
+                keyDatas.push({KEYBOARD_KEY_NUMBERS + GamepadKey::BACK, 0 != (state.Gamepad.wButtons & XINPUT_GAMEPAD_BACK)});
+                keyDatas.push({KEYBOARD_KEY_NUMBERS + GamepadKey::LEFT_BUMPER, 0 != (state.Gamepad.wButtons & XINPUT_GAMEPAD_LEFT_SHOULDER)});
+                keyDatas.push({KEYBOARD_KEY_NUMBERS + GamepadKey::RIGHT_BUMPER, 0 != (state.Gamepad.wButtons & XINPUT_GAMEPAD_RIGHT_SHOULDER)});
+                keyDatas.push({KEYBOARD_KEY_NUMBERS + GamepadKey::A, 0 != (state.Gamepad.wButtons & XINPUT_GAMEPAD_A)});
+                keyDatas.push({KEYBOARD_KEY_NUMBERS + GamepadKey::B, 0 != (state.Gamepad.wButtons & XINPUT_GAMEPAD_B)});
+                keyDatas.push({KEYBOARD_KEY_NUMBERS + GamepadKey::X, 0 != (state.Gamepad.wButtons & XINPUT_GAMEPAD_X)});
+                keyDatas.push({KEYBOARD_KEY_NUMBERS + GamepadKey::Y, 0 != (state.Gamepad.wButtons & XINPUT_GAMEPAD_Y)});
 
                 // Check if R/L trigger is pressed
-                keyDatas.push({GamepadKey::LEFT_TRIGGER, state.Gamepad.bLeftTrigger > XINPUT_GAMEPAD_TRIGGER_THRESHOLD});
-                keyDatas.push({GamepadKey::RIGHT_TRIGGER, state.Gamepad.bRightTrigger > XINPUT_GAMEPAD_TRIGGER_THRESHOLD});
+                keyDatas.push({KEYBOARD_KEY_NUMBERS + GamepadKey::LEFT_TRIGGER, state.Gamepad.bLeftTrigger > XINPUT_GAMEPAD_TRIGGER_THRESHOLD});
+                keyDatas.push({KEYBOARD_KEY_NUMBERS + GamepadKey::RIGHT_TRIGGER, state.Gamepad.bRightTrigger > XINPUT_GAMEPAD_TRIGGER_THRESHOLD});
 
                 // thumb
-                keyDatas.push({GamepadKey::LEFT_THUMB, 0 != (state.Gamepad.wButtons & XINPUT_GAMEPAD_LEFT_THUMB)});
-                keyDatas.push({GamepadKey::RIGHT_THUMB, 0 != (state.Gamepad.wButtons & XINPUT_GAMEPAD_RIGHT_THUMB)});
+                keyDatas.push({KEYBOARD_KEY_NUMBERS + GamepadKey::LEFT_THUMB, 0 != (state.Gamepad.wButtons & XINPUT_GAMEPAD_LEFT_THUMB)});
+                keyDatas.push({KEYBOARD_KEY_NUMBERS + GamepadKey::RIGHT_THUMB, 0 != (state.Gamepad.wButtons & XINPUT_GAMEPAD_RIGHT_THUMB)});
                 break;
             }
             //printf("gamepad-id %d, connect: %d\n", i, connected);

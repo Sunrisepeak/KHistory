@@ -8,6 +8,8 @@
 // dsvisual
 #include <dsvisual.hpp>
 
+#include "KPlugin.h"
+
 namespace khistory {
 
 class KeyHistory : public dsvisual::Widget {
@@ -20,9 +22,8 @@ public:
     KeyHistory();
 public:
     void setTransparency(int transparency = 50);
-private:
-    void __gameKeyVisualImpl();
-    void __updateGameKeyHighlightVec(const __KeyData &);
+    // Note: if you haven't use KPLUGIN_REGISTER, then plugin's lifetime need greater than KeyHistory-Obj
+    static int _registerPlugin(KPluginInterface *plugin);
 protected: // interface impl
     void _drawBasicInfoImpl() override;
     void _drawVisualImpl() override;
@@ -33,8 +34,9 @@ protected:
     int _mKeyDetectFPS;
     int _mTransparency;
     dstruct::Deque<__KeyData> _mKeyHistoryQueue;
-    dstruct::Vector<ImVec4>_mGameKeyHighlightTable;
-    static dstruct::Vector<ImVec4>_mKeyColorMapTable;
+    static dstruct::Vector<ImVec4> _mKeyColorMapTable;
+    int _mCurrentPluginIndex;
+    static dstruct::Vector<KPluginInterface *> _mPluginVec;
 };
 
 }
