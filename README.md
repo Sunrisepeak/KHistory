@@ -67,7 +67,14 @@
 #### [GamepadBasePlugin-Fighting.kplugin](kplugin/GamepadBasePlugin-Fighting.kplugin.hpp) - 基于 基础手柄插件 的扩展插件
 ![](docs/imgs/GamepadBasePlugin-Fighting.kplugin.png)
 
-## 五、相关视频
+### 插件开发流程
+
+- 继承插件接口
+- 实现按键布局接口
+- 实现按键状态处理接口
+- 注册插件
+
+## 六、相关视频
 
 > **更多介绍/开发动向 视频分享 -〉[地址](https://space.bilibili.com/65858958/channel/seriesdetail?sid=3473247)**
 
@@ -75,7 +82,7 @@
 - [KHistory: 街霸6 让一追二 使用C语言打出”高光”操作](https://www.bilibili.com/video/BV1W14y1X7vD)
 
 
-## 六、相关链接
+## 七、相关链接
 
 - [**KHistory**](https://github.com/Sunrisepeak/KHistory)
 - [**DSVisual**](https://github.com/Sunrisepeak/DSVisual)
