@@ -53,6 +53,19 @@
 ### 游戏手柄按键检测
 ![](docs/imgs/khistory-gamepad.demo.gif)
 
+## 五、插件模块 / 自定义插件
+> 开发者可以根据自己需求开发或扩展插件, 实现自定义的按键可视化面板
+
+### 插件示例/基础插件
+
+#### [KeyboardBasePlugin.kplugin](kplugin/KeyboardBasePlugin.kplugin.hpp) - 基础键盘插件
+![](docs/imgs/KeyboardBasePlugin.kplugin.png)
+
+#### [GamepadBasePlugin.kplugin](kplugin/GamepadBasePlugin.kplugin.hpp) - 基础手柄插件
+![](docs/imgs/GamepadBasePlugin.kplugin.png)
+
+#### [GamepadBasePlugin-Fighting.kplugin](kplugin/GamepadBasePlugin-Fighting.kplugin.hpp) - 基于 基础手柄插件 的扩展插件
+![](docs/imgs/GamepadBasePlugin-Fighting.kplugin.png)
 
 ## 五、相关视频
 
