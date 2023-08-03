@@ -13,27 +13,28 @@ namespace khistory {
 class PAL {
 public: // type
     enum GamepadKey : int {
-        DPAD_LEFT      = 0x0001,
-        DPAD_DOWN      = 0x0004,
-        DPAD_UP        = 0x0007,
-        DPAD_RIGHT     = 0x0010,
+        BASE           = KEYBOARD_KEY_NUMBERS,
+        DPAD_LEFT      = KEYBOARD_KEY_NUMBERS + 0x0001,
+        DPAD_DOWN      = KEYBOARD_KEY_NUMBERS + 0x0004,
+        DPAD_UP        = KEYBOARD_KEY_NUMBERS + 0x0007,
+        DPAD_RIGHT     = KEYBOARD_KEY_NUMBERS + 0x0010,
 
-        A              = 0x0002,
-        B              = 0x0005,
-        X              = 0x0008,
-        Y              = 0x000A,
+        A              = KEYBOARD_KEY_NUMBERS + 0x0002,
+        B              = KEYBOARD_KEY_NUMBERS + 0x0005,
+        X              = KEYBOARD_KEY_NUMBERS + 0x0008,
+        Y              = KEYBOARD_KEY_NUMBERS + 0x000A,
 
-        LEFT_BUMPER    = 0x0003,
-        RIGHT_BUMPER   = 0x0006,
-        LEFT_TRIGGER   = 0x0009,
-        RIGHT_TRIGGER  = 0x000B,
+        LEFT_BUMPER    = KEYBOARD_KEY_NUMBERS + 0x0003,
+        RIGHT_BUMPER   = KEYBOARD_KEY_NUMBERS + 0x0006,
+        LEFT_TRIGGER   = KEYBOARD_KEY_NUMBERS + 0x0009,
+        RIGHT_TRIGGER  = KEYBOARD_KEY_NUMBERS + 0x000B,
 
-        START          = 0x0011,
-        BACK           = 0x0012,
+        START          = KEYBOARD_KEY_NUMBERS + 0x0011,
+        BACK           = KEYBOARD_KEY_NUMBERS + 0x0012,
 
         // thumb
-        LEFT_THUMB     = 0x0013,
-        RIGHT_THUMB    = 0x0014,
+        LEFT_THUMB     = KEYBOARD_KEY_NUMBERS + 0x0013,
+        RIGHT_THUMB    = KEYBOARD_KEY_NUMBERS + 0x0014,
     };
 
     struct KeyData {

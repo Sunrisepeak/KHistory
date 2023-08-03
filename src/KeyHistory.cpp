@@ -56,10 +56,9 @@ void KeyHistory::setTransparency(int transparency) {
 }
 
 int KeyHistory::_registerPlugin(KPluginInterface *plugin) {
-    plugin->gameKeyNameTableInit();
-    plugin->gameKeyColorTableInit();
+    plugin->init();
     _mPluginVec.push_back(plugin);
-    return 0;
+    return 0; // Note: don't delete the return
 }
 
 void KeyHistory::_drawBasicInfoImpl() {
@@ -75,7 +74,7 @@ void KeyHistory::_drawBasicInfoImpl() {
 
 void KeyHistory::_drawVisualImpl() {
 
-    _mPluginVec[_mCurrentPluginIndex]->gameKeyLayoutVisualImpl();
+    _mPluginVec[_mCurrentPluginIndex]->keyLayoutVisualImpl();
 
     ImGui::Separator();
     {

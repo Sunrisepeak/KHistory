@@ -8,7 +8,7 @@
 // dsvisual
 #include <dsvisual.hpp>
 
-#include "KPlugin.h"
+#include "KPluginInterface.h"
 
 namespace khistory {
 
