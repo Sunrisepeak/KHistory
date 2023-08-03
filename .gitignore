@@ -35,3 +35,6 @@
 .xmake
 .vscode
 build
+kplugin/*.hh
+kplugin/plugin-auto-register-info.kplugin
+

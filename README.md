@@ -58,13 +58,13 @@
 
 ### 插件示例/基础插件
 
-#### [KeyboardBasePlugin.kplugin](kplugin/KeyboardBasePlugin.kplugin.hpp) - 基础键盘插件
+#### [KeyboardBasePlugin.kplugin](kplugin/KeyboardBasePlugin.KPluginInterface.hpp) - 基础键盘插件
 ![](docs/imgs/KeyboardBasePlugin.kplugin.png)
 
-#### [GamepadBasePlugin.kplugin](kplugin/GamepadBasePlugin.kplugin.hpp) - 基础手柄插件
+#### [GamepadBasePlugin.kplugin](kplugin/GamepadBasePlugin.KPluginInterface.hpp) - 基础手柄插件
 ![](docs/imgs/GamepadBasePlugin.kplugin.png)
 
-#### [GamepadBasePlugin-Fighting.kplugin](kplugin/GamepadBasePlugin-Fighting.kplugin.hpp) - 基于 基础手柄插件 的扩展插件
+#### [GamepadBasePlugin-Fighting.kplugin](kplugin/GamepadBasePlugin-Fighting.KPluginInterface.hpp) - 基于 基础手柄插件 的扩展插件
 ![](docs/imgs/GamepadBasePlugin-Fighting.kplugin.png)
 
 ### 插件开发流程

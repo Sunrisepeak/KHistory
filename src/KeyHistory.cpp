@@ -30,23 +30,23 @@ KeyHistory::KeyHistory() : _mCurrentPluginIndex { 0 } {
     }
 
     // gamepad key-color init
-    _mKeyColorMapTable[KEYBOARD_KEY_NUMBERS + PAL::GamepadKey::DPAD_UP]        = ImVec4(229 / 255.0f, 153 / 255.0f, 1.0f, 0.5f);
-    _mKeyColorMapTable[KEYBOARD_KEY_NUMBERS + PAL::GamepadKey::DPAD_DOWN]      = ImVec4(229 / 255.0f, 153 / 255.0f, 1.0f, 0.5f);
-    _mKeyColorMapTable[KEYBOARD_KEY_NUMBERS + PAL::GamepadKey::DPAD_LEFT]      = ImVec4(229 / 255.0f, 153 / 255.0f, 1.0f, 0.5f);
-    _mKeyColorMapTable[KEYBOARD_KEY_NUMBERS + PAL::GamepadKey::DPAD_RIGHT]     = ImVec4(229 / 255.0f, 153 / 255.0f, 1.0f, 0.5f);
+    _mKeyColorMapTable[PAL::GamepadKey::DPAD_UP]        = ImVec4(229 / 255.0f, 153 / 255.0f, 1.0f, 0.5f);
+    _mKeyColorMapTable[PAL::GamepadKey::DPAD_DOWN]      = ImVec4(229 / 255.0f, 153 / 255.0f, 1.0f, 0.5f);
+    _mKeyColorMapTable[PAL::GamepadKey::DPAD_LEFT]      = ImVec4(229 / 255.0f, 153 / 255.0f, 1.0f, 0.5f);
+    _mKeyColorMapTable[PAL::GamepadKey::DPAD_RIGHT]     = ImVec4(229 / 255.0f, 153 / 255.0f, 1.0f, 0.5f);
 
-    _mKeyColorMapTable[KEYBOARD_KEY_NUMBERS + PAL::GamepadKey::START]          = ImVec4(0.6f, 0.7f, 0.8f, 0.5f);
-    _mKeyColorMapTable[KEYBOARD_KEY_NUMBERS + PAL::GamepadKey::BACK]           = ImVec4(0.6f, 0.7f, 0.8f, 0.5f);
+    _mKeyColorMapTable[PAL::GamepadKey::START]          = ImVec4(0.6f, 0.7f, 0.8f, 0.5f);
+    _mKeyColorMapTable[PAL::GamepadKey::BACK]           = ImVec4(0.6f, 0.7f, 0.8f, 0.5f);
 
-    _mKeyColorMapTable[KEYBOARD_KEY_NUMBERS + PAL::GamepadKey::A]              = ImVec4(178 / 255.0f, 1.0f, 102 / 255.0f, 0.5f);
-    _mKeyColorMapTable[KEYBOARD_KEY_NUMBERS + PAL::GamepadKey::B]              = ImVec4(255 / 255.0f, 102 / 255.0f, 102 / 255.0f, 0.5f);
-    _mKeyColorMapTable[KEYBOARD_KEY_NUMBERS + PAL::GamepadKey::X]              = ImVec4(0.0f, 1.0f, 1.0f, 0.5f);
-    _mKeyColorMapTable[KEYBOARD_KEY_NUMBERS + PAL::GamepadKey::Y]              = ImVec4(1.0f, 1.0f, 0.0f, 0.5f);
+    _mKeyColorMapTable[PAL::GamepadKey::A]              = ImVec4(178 / 255.0f, 1.0f, 102 / 255.0f, 0.5f);
+    _mKeyColorMapTable[PAL::GamepadKey::B]              = ImVec4(255 / 255.0f, 102 / 255.0f, 102 / 255.0f, 0.5f);
+    _mKeyColorMapTable[PAL::GamepadKey::X]              = ImVec4(0.0f, 1.0f, 1.0f, 0.5f);
+    _mKeyColorMapTable[PAL::GamepadKey::Y]              = ImVec4(1.0f, 1.0f, 0.0f, 0.5f);
 
-    _mKeyColorMapTable[KEYBOARD_KEY_NUMBERS + PAL::GamepadKey::LEFT_BUMPER]    = ImVec4(0.0f, 0.0f, 1.0f, 0.5f);
-    _mKeyColorMapTable[KEYBOARD_KEY_NUMBERS + PAL::GamepadKey::RIGHT_BUMPER]   = ImVec4(0.0f, 0.0f, 1.0f, 0.5f);
-    _mKeyColorMapTable[KEYBOARD_KEY_NUMBERS + PAL::GamepadKey::LEFT_TRIGGER]   = ImVec4(1.0f, 0.0f, 0.0f, 0.5f);
-    _mKeyColorMapTable[KEYBOARD_KEY_NUMBERS + PAL::GamepadKey::RIGHT_TRIGGER]  = ImVec4(1.0f, 0.0f, 0.0f, 0.5f);
+    _mKeyColorMapTable[PAL::GamepadKey::LEFT_BUMPER]    = ImVec4(0.0f, 0.0f, 1.0f, 0.5f);
+    _mKeyColorMapTable[PAL::GamepadKey::RIGHT_BUMPER]   = ImVec4(0.0f, 0.0f, 1.0f, 0.5f);
+    _mKeyColorMapTable[PAL::GamepadKey::LEFT_TRIGGER]   = ImVec4(1.0f, 0.0f, 0.0f, 0.5f);
+    _mKeyColorMapTable[PAL::GamepadKey::RIGHT_TRIGGER]  = ImVec4(1.0f, 0.0f, 0.0f, 0.5f);
 
     DSTRUCT_ASSERT(_mPluginVec.empty() != true);
 }
@@ -56,10 +56,9 @@ void KeyHistory::setTransparency(int transparency) {
 }
 
 int KeyHistory::_registerPlugin(KPluginInterface *plugin) {
-    plugin->gameKeyNameTableInit();
-    plugin->gameKeyColorTableInit();
+    plugin->init();
     _mPluginVec.push_back(plugin);
-    return 0;
+    return 0; // Note: don't delete the return
 }
 
 void KeyHistory::_drawBasicInfoImpl() {
@@ -75,7 +74,7 @@ void KeyHistory::_drawBasicInfoImpl() {
 
 void KeyHistory::_drawVisualImpl() {
 
-    _mPluginVec[_mCurrentPluginIndex]->gameKeyLayoutVisualImpl();
+    _mPluginVec[_mCurrentPluginIndex]->keyLayoutVisualImpl();
 
     ImGui::Separator();
     {
