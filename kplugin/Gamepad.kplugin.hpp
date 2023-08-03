@@ -28,10 +28,10 @@ public: // interface impl
         _mGameKeyColorTable[KeyCode::GAMEPAD_X]              = ImVec4(0.0f, 1.0f, 1.0f, 0.5f);
         _mGameKeyColorTable[KeyCode::GAMEPAD_Y]              = ImVec4(1.0f, 1.0f, 0.0f, 0.5f);
 
-        _mGameKeyColorTable[KeyCode::GAMEPAD_LEFT_BUMPER]    = ImVec4(128 / 255.0f, 0.0f, 128 / 255.0f, 0.5f);
-        _mGameKeyColorTable[KeyCode::GAMEPAD_RIGHT_BUMPER]   = ImVec4(128 / 255.0f, 0.0f, 128 / 255.0f, 0.5f);
-        _mGameKeyColorTable[KeyCode::GAMEPAD_LEFT_TRIGGER]   = ImVec4(0.3f, 0.3f, 0.3f, 0.8f);
-        _mGameKeyColorTable[KeyCode::GAMEPAD_RIGHT_TRIGGER]  = ImVec4(0.3f, 0.3f, 0.3f, 0.8f);
+        _mGameKeyColorTable[KeyCode::GAMEPAD_LEFT_BUMPER]    = ImVec4(0.0f, 0.0f, 1.0f, 0.5f);
+        _mGameKeyColorTable[KeyCode::GAMEPAD_RIGHT_BUMPER]   = ImVec4(0.0f, 0.0f, 1.0f, 0.5f);
+        _mGameKeyColorTable[KeyCode::GAMEPAD_LEFT_TRIGGER]   = ImVec4(128 / 255.0f, 0.0f, 128 / 255.0f, 0.5f);
+        _mGameKeyColorTable[KeyCode::GAMEPAD_RIGHT_TRIGGER]  = ImVec4(128 / 255.0f, 0.0f, 128 / 255.0f, 0.5f);
     }
 
     /*

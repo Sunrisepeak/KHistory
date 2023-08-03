@@ -58,7 +58,7 @@ public: // interface impl
             _drawKey(KeyCode::KEYBOARD_M, (buttonWidth + spacing) * 7 - spacing + buttonWidth);
         }
         {
-            _drawKey(KeyCode::KEYBOARD_SPACE, buttonWidth * 3, -1, buttonWidth * 6);
+            _drawKey(KeyCode::KEYBOARD_SPACE, buttonWidth * 2.5, -1, buttonWidth * 6);
         }
     }
 };

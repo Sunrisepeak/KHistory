@@ -93,10 +93,7 @@ public: // interface impl
         for (auto &kStatus : __mkeyStatusTable) kStatus = false;
         for (auto keycode : keyVec) {
             if (PAL::gamepadConnected) {
-                int gamepadKeycode = keycode - KEYBOARD_KEY_NUMBERS;
-                if (gamepadKeycode < __mkeyStatusTable.size() && gamepadKeycode >= 0) {
-                    __mkeyStatusTable[gamepadKeycode] = true;
-                }
+                __mkeyStatusTable[keycode] = true;
             } else {
                 // keyboard
                 if (PAL::KeyMapTable[keycode].size() == 1) { // only detect alpha

@@ -14,27 +14,27 @@ class PAL {
 public: // type
     enum GamepadKey : int {
         BASE           = KEYBOARD_KEY_NUMBERS,
-        DPAD_LEFT      = KEYBOARD_KEY_NUMBERS + 0x0001,
-        DPAD_DOWN      = KEYBOARD_KEY_NUMBERS + 0x0004,
-        DPAD_UP        = KEYBOARD_KEY_NUMBERS + 0x0007,
-        DPAD_RIGHT     = KEYBOARD_KEY_NUMBERS + 0x0010,
+        DPAD_LEFT      = BASE + 0x0001,
+        DPAD_DOWN      = BASE + 0x0004,
+        DPAD_UP        = BASE + 0x0007,
+        DPAD_RIGHT     = BASE + 0x0010,
 
-        A              = KEYBOARD_KEY_NUMBERS + 0x0002,
-        B              = KEYBOARD_KEY_NUMBERS + 0x0005,
-        X              = KEYBOARD_KEY_NUMBERS + 0x0008,
-        Y              = KEYBOARD_KEY_NUMBERS + 0x000A,
+        A              = BASE + 0x0002,
+        B              = BASE + 0x0005,
+        X              = BASE + 0x0008,
+        Y              = BASE + 0x000A,
 
-        LEFT_BUMPER    = KEYBOARD_KEY_NUMBERS + 0x0003,
-        RIGHT_BUMPER   = KEYBOARD_KEY_NUMBERS + 0x0006,
-        LEFT_TRIGGER   = KEYBOARD_KEY_NUMBERS + 0x0009,
-        RIGHT_TRIGGER  = KEYBOARD_KEY_NUMBERS + 0x000B,
+        LEFT_BUMPER    = BASE + 0x0003,
+        RIGHT_BUMPER   = BASE + 0x0006,
+        LEFT_TRIGGER   = BASE + 0x0009,
+        RIGHT_TRIGGER  = BASE + 0x000B,
 
-        START          = KEYBOARD_KEY_NUMBERS + 0x0011,
-        BACK           = KEYBOARD_KEY_NUMBERS + 0x0012,
+        START          = BASE + 0x0011,
+        BACK           = BASE + 0x0012,
 
         // thumb
-        LEFT_THUMB     = KEYBOARD_KEY_NUMBERS + 0x0013,
-        RIGHT_THUMB    = KEYBOARD_KEY_NUMBERS + 0x0014,
+        LEFT_THUMB     = BASE + 0x0013,
+        RIGHT_THUMB    = BASE + 0x0014,
     };
 
     struct KeyData {
