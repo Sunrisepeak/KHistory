@@ -84,14 +84,14 @@
 **Note: 插件及开发细节请参考 [插件说明文档](kplugin)**
 
 
-## 五、贡献与更多有意思的插件
+## 六、贡献与更多有意思的插件
 
 > 欢迎大家把有意思的插件晒到这个讨论中 - [KPlugin - 有意思的插件讨论](https://github.com/Sunrisepeak/KHistory/discussions/9)
 
 ![](docs/imgs/kplugin.set.png)
 
 
-## 六、相关视频
+## 七、相关视频
 
 > **更多介绍/开发动向 视频分享 -〉[地址](https://space.bilibili.com/65858958/channel/seriesdetail?sid=3473247)**
 
@@ -99,7 +99,7 @@
 - [KHistory: 街霸6 让一追二 使用C语言打出”高光”操作](https://www.bilibili.com/video/BV1W14y1X7vD)
 
 
-## 七、相关链接
+## 八、相关链接
 
 - [**KHistory**](https://github.com/Sunrisepeak/KHistory)
 - [**DSVisual**](https://github.com/Sunrisepeak/DSVisual)
