@@ -1,5 +1,7 @@
 ## KPlugin Module - 插件模块 / 自定义插件
 
+> 背景: 为了增加可玩性 给KHistory开发一个插件模快KPlugin, 让更多的人能根据自己的使用环境和需求定制/开发按键可视化插件
+
 KPlugin 是KHistory的插件模块, 为其提供基础的插件功能和插件的扩展能力
 
 ![](../docs/imgs/khistory.demo.png)
@@ -190,7 +192,14 @@ xmake
 xmake r
 ```
 
-### 五、相关链接
+## 五、贡献与更多有意思的插件
+
+> 欢迎大家把有意思的插件晒到这个讨论中 - [KPlugin - 有意思的插件讨论](https://github.com/Sunrisepeak/KHistory/discussions/9)
+
+![](../docs/imgs/kplugin.set.png)
+
+
+### 六、相关链接
 
 - [**KHistory 项目主页**](https://github.com/Sunrisepeak/KHistory)
 - [**Github**](https://github.com/Sunrisepeak)

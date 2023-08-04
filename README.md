@@ -78,9 +78,18 @@
 #### [Plugin Base - Gamepad](kplugin/Gamepad.kplugin.hpp) - 基础手柄插件
 ![](docs/imgs/Gamepad.kplugin.png)
 
+
 ### 插件 开发/自定义 流程 - 无需了解C++/Imgui
 
 **Note: 插件及开发细节请参考 [插件说明文档](kplugin)**
+
+
+## 五、贡献与更多有意思的插件
+
+> 欢迎大家把有意思的插件晒到这个讨论中 - [KPlugin - 有意思的插件讨论](https://github.com/Sunrisepeak/KHistory/discussions/9)
+
+![](docs/imgs/kplugin.set.png)
+
 
 ## 六、相关视频
 
