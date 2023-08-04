@@ -9,7 +9,7 @@ class KeyboardFightingGame : public PluginBase {
 
 public:
     KeyboardFightingGame() {
-        _mPluginNmae += " - Keyboard Fighting Game";
+        _mPluginName += " - Keyboard Fighting Game";
     }
 
 public: // interface impl
@@ -21,22 +21,22 @@ public: // interface impl
 
     virtual void keyColorTableRemap() override {
         // gamepad key-color init
-        _mGameKeyColorTable[KeyCode::KEYBOARD_W] = ImVec4(229 / 255.0f, 153 / 255.0f, 1.0f, 0.5f);
-        _mGameKeyColorTable[KeyCode::KEYBOARD_A] = ImVec4(229 / 255.0f, 153 / 255.0f, 1.0f, 0.5f);
-        _mGameKeyColorTable[KeyCode::KEYBOARD_S] = ImVec4(229 / 255.0f, 153 / 255.0f, 1.0f, 0.5f);
-        _mGameKeyColorTable[KeyCode::KEYBOARD_D] = ImVec4(229 / 255.0f, 153 / 255.0f, 1.0f, 0.5f);
+        _mkeyColorTable[KeyCode::KEYBOARD_W] = ImVec4(229 / 255.0f, 153 / 255.0f, 1.0f, 0.5f);
+        _mkeyColorTable[KeyCode::KEYBOARD_A] = ImVec4(229 / 255.0f, 153 / 255.0f, 1.0f, 0.5f);
+        _mkeyColorTable[KeyCode::KEYBOARD_S] = ImVec4(229 / 255.0f, 153 / 255.0f, 1.0f, 0.5f);
+        _mkeyColorTable[KeyCode::KEYBOARD_D] = ImVec4(229 / 255.0f, 153 / 255.0f, 1.0f, 0.5f);
 
-        _mGameKeyColorTable[KeyCode::KEYBOARD_Y] = ImVec4(0.0f, 0.0f, 0.5f, 0.5f);
-        _mGameKeyColorTable[KeyCode::KEYBOARD_U] = ImVec4(0.5f, 0.0f, 0.5f, 0.5f);
-        _mGameKeyColorTable[KeyCode::KEYBOARD_I] = ImVec4(0.8f, 0.5f, 0.5f, 0.5f);
-        _mGameKeyColorTable[KeyCode::KEYBOARD_O] = ImVec4(0.5f, 0.5f, 0.8f, 0.5f);
+        _mkeyColorTable[KeyCode::KEYBOARD_Y] = ImVec4(0.0f, 0.0f, 0.5f, 0.5f);
+        _mkeyColorTable[KeyCode::KEYBOARD_U] = ImVec4(0.5f, 0.0f, 0.5f, 0.5f);
+        _mkeyColorTable[KeyCode::KEYBOARD_I] = ImVec4(0.8f, 0.5f, 0.5f, 0.5f);
+        _mkeyColorTable[KeyCode::KEYBOARD_O] = ImVec4(0.5f, 0.5f, 0.8f, 0.5f);
 
-        _mGameKeyColorTable[KeyCode::KEYBOARD_H] = ImVec4(178 / 255.0f, 1.0f, 102 / 255.0f, 0.5f);
-        _mGameKeyColorTable[KeyCode::KEYBOARD_J] = ImVec4(255 / 255.0f, 102 / 255.0f, 102 / 255.0f, 0.5f);
-        _mGameKeyColorTable[KeyCode::KEYBOARD_K] = ImVec4(0.0f, 1.0f, 1.0f, 0.5f);
-        _mGameKeyColorTable[KeyCode::KEYBOARD_L] = ImVec4(1.0f, 1.0f, 0.0f, 0.5f);
+        _mkeyColorTable[KeyCode::KEYBOARD_H] = ImVec4(178 / 255.0f, 1.0f, 102 / 255.0f, 0.5f);
+        _mkeyColorTable[KeyCode::KEYBOARD_J] = ImVec4(255 / 255.0f, 102 / 255.0f, 102 / 255.0f, 0.5f);
+        _mkeyColorTable[KeyCode::KEYBOARD_K] = ImVec4(0.0f, 1.0f, 1.0f, 0.5f);
+        _mkeyColorTable[KeyCode::KEYBOARD_L] = ImVec4(1.0f, 1.0f, 0.0f, 0.5f);
 
-        _mGameKeyColorTable[KeyCode::KEYBOARD_SPACE] = ImVec4(0.6f, 0.7f, 0.8f, 0.5f);
+        _mkeyColorTable[KeyCode::KEYBOARD_SPACE] = ImVec4(0.6f, 0.7f, 0.8f, 0.5f);
     }
 
     /*

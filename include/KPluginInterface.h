@@ -13,9 +13,9 @@ public: // interface
 public: // optional interface 
     virtual void init() {  }
 public:
-    std::string getPluginName() const { return _mPluginNmae; }
+    std::string getPluginName() const { return _mPluginName; }
 protected:
-    std::string _mPluginNmae;
+    std::string _mPluginName;
 };
 
 } // namespace khistory end

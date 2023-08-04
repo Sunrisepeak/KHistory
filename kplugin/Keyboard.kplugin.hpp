@@ -9,7 +9,7 @@ class Keyboard : public PluginBase {
 
 public:
     Keyboard() {
-        _mPluginNmae += " - Keyboard";
+        _mPluginName += " - Keyboard";
     }
 
 public: // interface impl

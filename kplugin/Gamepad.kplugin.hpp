@@ -9,29 +9,29 @@ class Gamepad : public PluginBase {
 
 public:
     Gamepad() {
-        KPluginInterface::_mPluginNmae += " - Gamepad";
+        KPluginInterface::_mPluginName += " - Gamepad";
     }
 
 public: // interface impl
     virtual void keyColorTableRemap() override {
         // gamepad key-color init
-        _mGameKeyColorTable[KeyCode::GAMEPAD_DPAD_UP]        = ImVec4(229 / 255.0f, 153 / 255.0f, 1.0f, 0.5f);
-        _mGameKeyColorTable[KeyCode::GAMEPAD_DPAD_DOWN]      = ImVec4(229 / 255.0f, 153 / 255.0f, 1.0f, 0.5f);
-        _mGameKeyColorTable[KeyCode::GAMEPAD_DPAD_LEFT]      = ImVec4(229 / 255.0f, 153 / 255.0f, 1.0f, 0.5f);
-        _mGameKeyColorTable[KeyCode::GAMEPAD_DPAD_RIGHT]     = ImVec4(229 / 255.0f, 153 / 255.0f, 1.0f, 0.5f);
+        _mkeyColorTable[KeyCode::GAMEPAD_DPAD_UP]        = ImVec4(229 / 255.0f, 153 / 255.0f, 1.0f, 0.5f);
+        _mkeyColorTable[KeyCode::GAMEPAD_DPAD_DOWN]      = ImVec4(229 / 255.0f, 153 / 255.0f, 1.0f, 0.5f);
+        _mkeyColorTable[KeyCode::GAMEPAD_DPAD_LEFT]      = ImVec4(229 / 255.0f, 153 / 255.0f, 1.0f, 0.5f);
+        _mkeyColorTable[KeyCode::GAMEPAD_DPAD_RIGHT]     = ImVec4(229 / 255.0f, 153 / 255.0f, 1.0f, 0.5f);
 
-        _mGameKeyColorTable[KeyCode::GAMEPAD_START]          = ImVec4(0.6f, 0.7f, 0.8f, 0.5f);
-        _mGameKeyColorTable[KeyCode::GAMEPAD_BACK]           = ImVec4(0.8f, 0.7f, 0.6f, 0.5f);
+        _mkeyColorTable[KeyCode::GAMEPAD_START]          = ImVec4(0.6f, 0.7f, 0.8f, 0.5f);
+        _mkeyColorTable[KeyCode::GAMEPAD_BACK]           = ImVec4(0.8f, 0.7f, 0.6f, 0.5f);
 
-        _mGameKeyColorTable[KeyCode::GAMEPAD_A]              = ImVec4(178 / 255.0f, 1.0f, 102 / 255.0f, 0.5f);
-        _mGameKeyColorTable[KeyCode::GAMEPAD_B]              = ImVec4(255 / 255.0f, 102 / 255.0f, 102 / 255.0f, 0.5f);
-        _mGameKeyColorTable[KeyCode::GAMEPAD_X]              = ImVec4(0.0f, 1.0f, 1.0f, 0.5f);
-        _mGameKeyColorTable[KeyCode::GAMEPAD_Y]              = ImVec4(1.0f, 1.0f, 0.0f, 0.5f);
+        _mkeyColorTable[KeyCode::GAMEPAD_A]              = ImVec4(178 / 255.0f, 1.0f, 102 / 255.0f, 0.5f);
+        _mkeyColorTable[KeyCode::GAMEPAD_B]              = ImVec4(255 / 255.0f, 102 / 255.0f, 102 / 255.0f, 0.5f);
+        _mkeyColorTable[KeyCode::GAMEPAD_X]              = ImVec4(0.0f, 1.0f, 1.0f, 0.5f);
+        _mkeyColorTable[KeyCode::GAMEPAD_Y]              = ImVec4(1.0f, 1.0f, 0.0f, 0.5f);
 
-        _mGameKeyColorTable[KeyCode::GAMEPAD_LEFT_BUMPER]    = ImVec4(0.0f, 0.0f, 1.0f, 0.5f);
-        _mGameKeyColorTable[KeyCode::GAMEPAD_RIGHT_BUMPER]   = ImVec4(0.0f, 0.0f, 1.0f, 0.5f);
-        _mGameKeyColorTable[KeyCode::GAMEPAD_LEFT_TRIGGER]   = ImVec4(128 / 255.0f, 0.0f, 128 / 255.0f, 0.5f);
-        _mGameKeyColorTable[KeyCode::GAMEPAD_RIGHT_TRIGGER]  = ImVec4(128 / 255.0f, 0.0f, 128 / 255.0f, 0.5f);
+        _mkeyColorTable[KeyCode::GAMEPAD_LEFT_BUMPER]    = ImVec4(0.0f, 0.0f, 1.0f, 0.5f);
+        _mkeyColorTable[KeyCode::GAMEPAD_RIGHT_BUMPER]   = ImVec4(0.0f, 0.0f, 1.0f, 0.5f);
+        _mkeyColorTable[KeyCode::GAMEPAD_LEFT_TRIGGER]   = ImVec4(128 / 255.0f, 0.0f, 128 / 255.0f, 0.5f);
+        _mkeyColorTable[KeyCode::GAMEPAD_RIGHT_TRIGGER]  = ImVec4(128 / 255.0f, 0.0f, 128 / 255.0f, 0.5f);
     }
 
     /*

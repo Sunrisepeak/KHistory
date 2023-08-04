@@ -10,6 +10,8 @@
 > **点击[Release](https://github.com/Sunrisepeak/KHistory/releases)获取对应平台最新版本**
 
 
+![](docs/imgs/khistory.demo.png)
+
 
 ## 一、功能特性
 
@@ -19,7 +21,8 @@
   - 按键历史记录数
   - 透明度
   - 检测帧率
-- 游戏按键可视化(待优化)
+  - 可视化插件选择
+- 按键可视化及扩展
 
 
 
@@ -32,8 +35,8 @@
 | 控制-按键历史记录数 | &#x2705; | &#x2705; |       |        |
 |     控制-透明度     | &#x2705; | &#x2705; |       |        |
 |    控制-检测帧率    | &#x2705; | &#x2705; |       |        |
-|   游戏按键可视化    | &#x2705; | &#x2705; |       | 待优化 |
-|                     |          |          |       |        |
+|     按键可视化      | &#x2705; | &#x2705; |       | 已支持插件扩展/自定义  |
+|     插件扩展        | &#x2705; | &#x2705; | &#x2705; |        |
 
 **注: MacOS 后续支持**
 
@@ -54,25 +57,30 @@
 ![](docs/imgs/khistory-gamepad.demo.gif)
 
 ## 五、插件模块 / 自定义插件
-> 开发者可以根据自己需求开发或扩展插件, 实现自定义的按键可视化面板
+> **开发者:** 可根据自己需求开发或扩展插件, 实现自定义的按键可视化面板
+>
+> **用户:** 可以根据使用场景选择对应/合适的插件进行按键的可视化(如键盘、游戏手柄), 如下图:
+>
+
+![](docs/imgs/plugin-control.png)
+
+### 插件模块功能
+- 插件基本功能 - 用户可根据场景自由切换插件进行按键可视化(如: 按键/游戏手柄...)
+- Mini插件框架PluginBase -  提供标准接口和后台自动完成按键事件处理和布局(按键状态)更新功能
+- 插件自动注册功能 - 把插件放置`kplugin/auto-register`目录即可在编译期自动注册
+- 基础插件及插件扩展 - 已提供键盘和手柄基础插件及格斗游戏扩展插件, **用户无需了解C++/Imgui也可自己开发插件**
 
 ### 插件示例/基础插件
 
-#### [KeyboardBasePlugin.kplugin](kplugin/KeyboardBasePlugin.KPluginInterface.hpp) - 基础键盘插件
-![](docs/imgs/KeyboardBasePlugin.kplugin.png)
+#### [Plugin Base - Keyboard](Keyboard.kplugin.hpp) - 基础键盘插件
+![](docs/imgs/Keyboard.kplugin.png)
 
-#### [GamepadBasePlugin.kplugin](kplugin/GamepadBasePlugin.KPluginInterface.hpp) - 基础手柄插件
-![](docs/imgs/GamepadBasePlugin.kplugin.png)
+#### [Plugin Base - Gamepad](kplugin/Gamepad.kplugin.hpp) - 基础手柄插件
+![](docs/imgs/Gamepad.kplugin.png)
 
-#### [GamepadBasePlugin-Fighting.kplugin](kplugin/GamepadBasePlugin-Fighting.KPluginInterface.hpp) - 基于 基础手柄插件 的扩展插件
-![](docs/imgs/GamepadBasePlugin-Fighting.kplugin.png)
+### 插件 开发/自定义 流程 - 无需了解C++/Imgui
 
-### 插件开发流程
-
-- 继承插件接口
-- 实现按键布局接口
-- 实现按键状态处理接口
-- 注册插件
+**Note: 插件及开发细节请参考 [插件说明文档](kplugin)**
 
 ## 六、相关视频
 

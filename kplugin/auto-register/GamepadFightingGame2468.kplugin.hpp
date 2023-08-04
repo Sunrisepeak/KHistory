@@ -8,17 +8,17 @@ namespace khistory {
 class GamepadFightingGame2468 : public Gamepad {
 public:
     GamepadFightingGame2468() : Gamepad() {
-        _mPluginNmae += " - Fighting Game - 2468";
+        _mPluginName += " - Fighting Game - 2468";
     }
 
 public:
     void keyNameTableRemap() override {
         Gamepad::keyNameTableRemap(); // default init
 
-        _mkeyNameTable[PAL::GamepadKey::DPAD_UP]        = "8";
-        _mkeyNameTable[PAL::GamepadKey::DPAD_DOWN]      = "2";
-        _mkeyNameTable[PAL::GamepadKey::DPAD_LEFT]      = "4";
-        _mkeyNameTable[PAL::GamepadKey::DPAD_RIGHT]     = "6";
+        _mkeyNameTable[KeyCode::GAMEPAD_DPAD_UP]        = "8";
+        _mkeyNameTable[KeyCode::GAMEPAD_DPAD_DOWN]      = "2";
+        _mkeyNameTable[KeyCode::GAMEPAD_DPAD_LEFT]      = "4";
+        _mkeyNameTable[KeyCode::GAMEPAD_DPAD_RIGHT]     = "6";
     }
 };
 

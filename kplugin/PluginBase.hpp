@@ -8,6 +8,8 @@ namespace khistory {
 
 class PluginBase : public KPluginInterface {
 public:
+    using KeyColor = ImVec4;
+
     enum KeyCode : int {
         KEYBOARD_A = 'A',
         KEYBOARD_B = 'B',
@@ -63,7 +65,7 @@ public:
 
 public:
     PluginBase() {
-        KPluginInterface::_mPluginNmae = "Plugin Base";
+        KPluginInterface::_mPluginName = "Plugin Base";
     }
 
 public: // interface impl
@@ -133,23 +135,23 @@ public: // optional interface
     }
 
     virtual void keyColorTableRemap() {
-        for (auto &kColor : _mGameKeyColorTable) kColor = ImVec4(1, 1, 1, 0.25);
+        for (auto &kColor : _mkeyColorTable) kColor = ImVec4(1, 1, 1, 0.25);
     }
 
 protected:
     float _mButtonWidth, _mButtonHeight;
-    dstruct::Array<ImVec4, KEY_NUMBERS> _mGameKeyColorTable;
+    dstruct::Array<ImVec4, KEY_NUMBERS> _mkeyColorTable;
     dstruct::Array<std::string, KEY_NUMBERS> _mkeyNameTable;
 
     void _drawKey(int keycode, float cursorPosX = -1, float cursorPosY = -1, float width = 0, float height = 0, float fontScale = 0) {
-        
+
         if (cursorPosX >= 0) ImGui::SetCursorPosX(cursorPosX);
         if (cursorPosY >= 0) ImGui::SetCursorPosY(__mCursorPosYBase + cursorPosY);
         
         if (width <= 0) width = _mButtonWidth;
         if (height <= 0) height = _mButtonHeight;
 
-        ImGui::PushStyleColor(ImGuiCol_Button, __mkeyStatusTable[keycode] ? _mGameKeyColorTable[keycode] : ImVec4(0, 0, 0, 0.25));
+        ImGui::PushStyleColor(ImGuiCol_Button, __mkeyStatusTable[keycode] ? _mkeyColorTable[keycode] : ImVec4(0, 0, 0, 0.25));
         {
             float oldFontSize = ImGui::GetFont()->Scale;
             ImVec2 textSize =  ImGui::CalcTextSize(_mkeyNameTable[keycode].c_str());
