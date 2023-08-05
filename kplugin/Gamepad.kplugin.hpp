@@ -3,7 +3,7 @@
 //
 // Copyright (C) 2023 - present
 //
-// Author: Sunrisepeak/SPeak/言峰 (speakshen@163.com)
+// Author: Sunrisepeak (speakshen@163.com)
 // ProjectLinks: https://github.com/Sunrisepeak/KHistory
 //
 // Modify History:
@@ -61,18 +61,16 @@ public: // interface impl
         float areaWidth = layoutWidth / 3;
 
         {
-            float fontScale = _mButtonHeight < 50 ? 0.65 : 1;
             { // LT/RT
                 _drawKey(KeyCode::GAMEPAD_LEFT_TRIGGER,
                     _mButtonWidth, -1, // cursor x / y
-                    2 * _mButtonWidth, _mButtonHeight / 2,
-                    fontScale
+                    2 * _mButtonWidth, _mButtonHeight / 2
                 ); _SameLine();
-                _drawKey(KeyCode::GAMEPAD_RIGHT_TRIGGER, 2 * areaWidth + _mButtonWidth, -1, 2 * _mButtonWidth, _mButtonHeight / 2, fontScale);
+                _drawKey(KeyCode::GAMEPAD_RIGHT_TRIGGER, 2 * areaWidth + _mButtonWidth, -1, 2 * _mButtonWidth, _mButtonHeight / 2);
             }
             { // LB/RB
-                _drawKey(KeyCode::GAMEPAD_LEFT_BUMPER, _mButtonWidth, -1, 2 * _mButtonWidth, _mButtonHeight / 2, fontScale); _SameLine();
-                _drawKey(KeyCode::GAMEPAD_RIGHT_BUMPER, 2 * areaWidth + _mButtonHeight, -1, 2 * _mButtonWidth, _mButtonHeight / 2, fontScale);
+                _drawKey(KeyCode::GAMEPAD_LEFT_BUMPER, _mButtonWidth, -1, 2 * _mButtonWidth, _mButtonHeight / 2); _SameLine();
+                _drawKey(KeyCode::GAMEPAD_RIGHT_BUMPER, 2 * areaWidth + _mButtonHeight, -1, 2 * _mButtonWidth, _mButtonHeight / 2);
             }
         }
         {
@@ -87,14 +85,12 @@ public: // interface impl
                 _drawKey(KeyCode::GAMEPAD_DPAD_RIGHT, secondLineAreaStart + _mButtonWidth * 2); _SameLine();
             }
             { // back / start
-                float fontScale = _mButtonHeight / 2 < 25 ? 0.45 : 0.7;
                 _drawKey(
                     KeyCode::GAMEPAD_BACK,
                     areaWidth + secondLineAreaStart, -1,
-                    _mButtonWidth, _mButtonHeight / 2,
-                    fontScale
+                    _mButtonWidth, _mButtonHeight / 2
                 ); _SameLine();
-                _drawKey(KeyCode::GAMEPAD_START, areaWidth + secondLineAreaStart + _mButtonWidth * 2, -1, _mButtonWidth, _mButtonHeight / 2, fontScale); _SameLine();
+                _drawKey(KeyCode::GAMEPAD_START, areaWidth + secondLineAreaStart + _mButtonWidth * 2, -1, _mButtonWidth, _mButtonHeight / 2); _SameLine();
             }
             {
                 _drawKey(KeyCode::GAMEPAD_X, 2 * areaWidth + secondLineAreaStart); _SameLine();

@@ -3,7 +3,7 @@
 //
 // Copyright (C) 2023 - present
 //
-// Author: Sunrisepeak/SPeak/言峰 (speakshen@163.com)
+// Author: Sunrisepeak (speakshen@163.com)
 // ProjectLinks: https://github.com/Sunrisepeak/KHistory
 //
 // Modify History:
