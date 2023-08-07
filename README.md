@@ -101,6 +101,7 @@
 
 - [开源软件: KHistory 按键检测及历史记录显示工具介绍](https://www.bilibili.com/video/BV1Xx4y1o7cp)
 - [KHistory: 街霸6 让一追二 使用C语言打出”高光”操作](https://www.bilibili.com/video/BV1W14y1X7vD)
+- [开源软件: KHistory 按键检测工具插件模块基础功能及扩展介绍](https://www.bilibili.com/video/BV1Uk4y1g7aU)
 
 
 ## 八、相关链接

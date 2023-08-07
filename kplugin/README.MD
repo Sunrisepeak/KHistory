@@ -167,7 +167,7 @@ void _drawKey(int keycode, float cursorPosX = -1, float cursorPosY = -1, float w
 
 根据需求可在这个函数中对多个按键的颜色进行 配置/自定义
 
-格式:`_mkeyColorTable[KeyCode] = { R, G, B, T };` 其中 0.0f << R/G/B/T << 1.0f
+格式:`_mkeyColorTable[KeyCode] = { R, G, B, T };` 其中 0.0f <= R/G/B/T <= 1.0f
 
 ```cpp
 virtual void keyColorTableRemap() override {
