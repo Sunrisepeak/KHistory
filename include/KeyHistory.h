@@ -19,7 +19,7 @@
 // dstruct
 #include <dstruct.hpp>
 // dsvisual
-#include <dsvisual.hpp>
+#include <dsvisual-core.h>
 
 #include "KPluginInterface.h"
 

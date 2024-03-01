@@ -15,7 +15,7 @@
 #define __KPLUGIN_INTERFACE_H__KHISTORY
 
 #include <dstruct.hpp>
-#include <dsvisual.hpp>
+#include <dsvisual-core.h>
 
 namespace khistory {
 

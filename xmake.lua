@@ -9,7 +9,7 @@ add_requires("imgui 1.88", {configs = {glfw_opengl3 = true}})
 add_packages("imgui")
 -- use dsvisual framework
 add_includedirs("third-party/DSVisual")
-add_files("third-party/DSVisual/dsv-core/dsvisual-core.cpp")
+add_files("third-party/DSVisual/dsvisual-core.cpp")
 add_includedirs("third-party/DStruct")
 
 -- config os platform
