@@ -11,7 +11,7 @@
 //
 //
 
-#include <dsvisual.hpp>
+#include <dsvisual-core.h>
 
 #include "KeyHistory.h"
 #include "KPlugin.h"
