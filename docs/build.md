@@ -48,6 +48,12 @@ Invoke-Expression (Invoke-Webrequest 'https://xmake.io/psget.text' -UseBasicPars
 git clone --recursive git@github.com:Sunrisepeak/KHistory.git
 ```
 
+或
+
+```bash
+git clone --recursive https://github.com/Sunrisepeak/KHistory.git
+```
+
 
 
 ## 编译 & 运行
