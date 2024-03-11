@@ -155,8 +155,8 @@ dstruct::Vector<PAL::KeyData> PAL::platformKeyDetect(unsigned int wID) {
             }
             //printf("key %ld-%d: %d\n", event.xkey.keycode, kd.pressed, xideviceevent->detail);
             XFreeEventData(display, &event.xcookie);
+            keyEventVec.push(kd);
         }
-        keyEventVec.push(kd);
     }
 
     //printf ("platformKeyDetect end");
