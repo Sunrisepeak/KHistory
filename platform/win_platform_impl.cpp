@@ -40,6 +40,7 @@ LRESULT CALLBACK KeyboardHookProc(int nCode, WPARAM wParam, LPARAM lParam); // k
 
 void PAL::platformInit() {
     PAL::gamepadConnected = false;
+    PAL::globalDetectWinID = 'K' + 'H' + 'i' + 's' + 't' + 'o' + 'r' + 'y';
     gTargetWindowID = 0;
     gKeyboardHook = SetWindowsHookEx(WH_KEYBOARD_LL, KeyboardHookProc, NULL, 0);
     DSTRUCT_ASSERT(gKeyboardHook != NULL);
@@ -185,7 +186,11 @@ LRESULT CALLBACK KeyboardHookProc(int nCode, WPARAM wParam, LPARAM lParam) {
         printf("%d %d, %s\n", reinterpret_cast<unsigned int>(hWnd), gTargetWindowID, buf);
 #endif
         // verify window id & test, is it other programe injected?
-        if (reinterpret_cast<unsigned int>(hWnd) == gTargetWindowID /* && (pKbdStruct->flags & LLKHF_INJECTED) == 0 */) {
+        if (
+            gTargetWindowID == PAL::globalDetectWinID ||
+            reinterpret_cast<unsigned int>(hWnd) == gTargetWindowID
+            /* && (pKbdStruct->flags & LLKHF_INJECTED) == 0 */
+        ) {
             PAL::KeyData kd;
             kd.key = pKbdStruct->scanCode;
             if (wParam == WM_KEYDOWN) {

@@ -15,6 +15,7 @@
 
 dstruct::Vector<std::string> khistory::PAL::KeyMapTable(KEY_NUMBERS, "");
 bool khistory::PAL::gamepadConnected = false;
+unsigned int khistory::PAL::globalDetectWinID = 0;
 
 namespace khistory {
 

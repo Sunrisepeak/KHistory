@@ -181,7 +181,11 @@ void KeyHistory::_drawControlImpl() {
         ImGui::SameLine();
 
         if (ImGui::BeginCombo(" <- window", windowName.c_str(), 0)) {
-            auto currentWindowList = TargetWindowKeyDetect::getInstance().getWindowInfoList();
+            dstruct::Vector<PAL::WindowInfo> currentWindowList = TargetWindowKeyDetect::getInstance().getWindowInfoList();
+            currentWindowList.push_back(PAL::WindowInfo{
+                .id = PAL::globalDetectWinID,
+                .name = "Global Detect(Note: don't use when input passwd)"
+            });
             TargetWindowKeyDetect::getInstance().setTargetWindow({0, ""});
             isListening = false;
             for (int n = 0; n < currentWindowList.size(); n++) {

@@ -72,6 +72,7 @@ private:
 public:
     static bool gamepadConnected;
     static dstruct::Vector<std::string> KeyMapTable;
+    static unsigned int globalDetectWinID;
 };
 
 }
