@@ -11,7 +11,7 @@
 ```bash
 sudo add-apt-repository ppa:xmake-io/xmake
 sudo apt-get update
-sudo apt-get install g++ gdb xmake make mesa-common-dev git -y
+sudo apt-get install g++ gdb xmake make mesa-common-dev git libx11-dev libxi-dev -y
 ```
 
 ### Windows
