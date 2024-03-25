@@ -40,6 +40,7 @@ LRESULT CALLBACK KeyboardHookProc(int nCode, WPARAM wParam, LPARAM lParam); // k
 
 void PAL::platformInit() {
     PAL::gamepadConnected = false;
+    // globalDetectWinID is a flag, isn't real window id
     PAL::globalDetectWinID = 'K' + 'H' + 'i' + 's' + 't' + 'o' + 'r' + 'y';
     gTargetWindowID = 0;
     gKeyboardHook = SetWindowsHookEx(WH_KEYBOARD_LL, KeyboardHookProc, NULL, 0);
@@ -95,14 +96,14 @@ dstruct::Vector<PAL::KeyData> PAL::platformKeyDetect(unsigned int wID) {
         gTargetWindowID = wID;
     }
 
+    HWND hWnd = GetForegroundWindow();
+
     { // gamepad
         bool connected = false;
         DWORD dwResult;
         XINPUT_STATE state;
         ZeroMemory(&state, sizeof(XINPUT_STATE));
         DWORD numControllers = XUSER_MAX_COUNT;
-
-        HWND hWnd = GetForegroundWindow();
 
         // gamepad connect check
         for (DWORD i = 0; i < numControllers && reinterpret_cast<unsigned int>(hWnd) == gTargetWindowID; ++i) {
@@ -139,7 +140,8 @@ dstruct::Vector<PAL::KeyData> PAL::platformKeyDetect(unsigned int wID) {
     if (!PAL::gamepadConnected) {   // keyboard
         MSG msg; // translate msg to hook func
         int msgLimit = 10;
-        while (PeekMessage(&msg, reinterpret_cast<HWND>(gTargetWindowID), 0, 0, PM_REMOVE) > 0 && msgLimit--) {
+        HWND wId = PAL::globalDetectWinID == gTargetWindowID ? hWnd : reinterpret_cast<HWND>(gTargetWindowID);
+        while (PeekMessage(&msg, wId, 0, 0, PM_REMOVE) > 0 && msgLimit--) {
             TranslateMessage(&msg);
             DispatchMessage(&msg);
         }

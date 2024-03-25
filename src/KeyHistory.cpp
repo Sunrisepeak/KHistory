@@ -182,10 +182,16 @@ void KeyHistory::_drawControlImpl() {
 
         if (ImGui::BeginCombo(" <- window", windowName.c_str(), 0)) {
             dstruct::Vector<PAL::WindowInfo> currentWindowList = TargetWindowKeyDetect::getInstance().getWindowInfoList();
+            PAL::WindowInfo wInfo;
+            wInfo.id = PAL::globalDetectWinID;
+            wInfo.name = "Global Detect(Note: don't use when input passwd)";
+            currentWindowList.push_back(wInfo);
+/* error C7555: need std:c++20
             currentWindowList.push_back(PAL::WindowInfo{
                 .id = PAL::globalDetectWinID,
                 .name = "Global Detect(Note: don't use when input passwd)"
             });
+*/
             TargetWindowKeyDetect::getInstance().setTargetWindow({0, ""});
             isListening = false;
             for (int n = 0; n < currentWindowList.size(); n++) {
